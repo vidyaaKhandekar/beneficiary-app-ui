@@ -5,10 +5,13 @@ import React from 'react';
 // import AppNavigator from './src/Navigation/AppNavigator'
 // import { BottomNavigation } from 'react-native-paper'
 import BottomNavigator from './src/Component/BottomNavigator';
+import { View ,Text} from 'react-native';
 
 const App = () => {
   return (
-  <BottomNavigator/>
+
+    <BottomNavigator/>
+
   );
 };
 

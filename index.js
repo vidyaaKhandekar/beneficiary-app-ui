@@ -14,12 +14,11 @@ const theme = {
       primary: '#3C5FDD',
       secondary: 'yellow',
     },
-    
   };
 export default function Main() {
     return (
         <SafeAreaProvider>
-      <PaperProvider theme={theme}>
+         <PaperProvider theme={theme}>
         <App />
       </PaperProvider>
       </SafeAreaProvider>

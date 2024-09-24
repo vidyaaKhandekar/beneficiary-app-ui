@@ -52,6 +52,7 @@ const BottomNavigator = () => {
 const styles = StyleSheet.create({
   bottomNavigation: {
     width: '100%',
+
   },
   label: {
     fontSize: 40, // Font size for label
