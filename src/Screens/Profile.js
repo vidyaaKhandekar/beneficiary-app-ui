@@ -7,17 +7,19 @@ import { documentName } from '../Constatnt/Constant';
 import HeadingText from '../Component/HeadingText';
 import CustomButton from '../Component/CustomButton';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
+  const handleOnPress = ()=>{
+     navigation.navigate('Search');
+  };
   return (
     <View style={styles.container}>
       <Navbar />
-      <HeadingText benificiary={true} heading={'Vidya Khandekar'} helperHeading={'Logged In With Digilocker'} />
-      <CustomProgressBar totalDocuments={10} presentDocuments={9} />
+      <HeadingText benificiary={true} heading={'Anaya Gupta'} helperHeading={'Logged In With Digilocker'} />
+      <CustomProgressBar totalDocuments={6} presentDocuments={6} />
       {/* Scrollable part of the screen */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <DocumentList documents={documentName} />
-        <CustomButton label="Explore Scholarship" marginTop={18} height={50} width={'95%'} padding={5}/>
-        <CustomButton label="Upload Missing Documents" marginTop={8} height={50} width={'95%'} padding={5}/>
+        <CustomButton testId={'click-explore-scholarship'} label="Explore Scholarship" marginTop={18} height={40} width={'95%'}  handleClick={handleOnPress}/>
       </ScrollView>
     </View>
   );
@@ -26,10 +28,9 @@ const Profile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // Take full height of the screen
+    backgroundColor:'#FAFAFA',
   },
   scrollContainer: {
-    paddingHorizontal: 16, // Optional padding
-    paddingBottom: 50, // Extra space at the bottom for scrolling
   },
 });
 

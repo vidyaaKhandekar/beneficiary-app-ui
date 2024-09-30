@@ -1,28 +1,68 @@
 import React from 'react';
-import { Appbar } from 'react-native-paper';
-import Theme from '../Theme/Theme';
+import {Appbar} from 'react-native-paper';
+import {View, Text, StyleSheet} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Navbar = () => {
-  const theme = Theme();
-
   return (
-    <Appbar.Header style={theme.appBarTheme}>
+    <Appbar.Header style={styles.appBarTheme}>
       <Appbar.Action icon="menu" onPress={() => {}} />
       <Appbar.Content
         title="FAST PASS"
         titleStyle={{
-          fontFamily: theme.fonts.regular.fontFamily,
-          fontSize: theme.fonts.regular.fontSize,
-          fontStyle: theme.fonts.regular.fontStyle,
-          fontWeight: theme.fonts.regular.fontWeight,
-          lineHeight: theme.fonts.regular.lineHeight,
-          textAlign: theme.fonts.regular.textAlign,
+          fontFamily: styles.fonts.regular.fontFamily,
+          fontSize: styles.fonts.regular.fontSize,
+          fontStyle: styles.fonts.regular.fontStyle,
+          fontWeight: styles.fonts.regular.fontWeight,
+          lineHeight: styles.fonts.regular.lineHeight,
+          textAlign: styles.fonts.regular.textAlign,
         }}
       />
-      {/* <Appbar.Action icon="calendar" onPress={() => {}} /> */}
-      {/* add dropdown select */}
+      {/* Language  on the right side */}
+      <View style={styles.view}>
+        <Text style={styles.text}>EN</Text>
+        <MaterialCommunityIcons
+          name="chevron-down"
+          size={15}
+          color={'#4D4639'}
+          style={styles.icon}
+        />
+      </View>
     </Appbar.Header>
   );
 };
-
+const styles = StyleSheet.create({
+  appBarTheme: {
+    marginTop: '24px',
+    marginLeft: '12px',
+    backgroundColor:'#FAFAFA',
+  },
+  fonts: {
+    regular: {
+      fontFamily: 'Poppins-Regular',
+      fontSize: 13,
+      fontStyle: 'italic',
+      fontWeight: '400',
+      lineHeight: 19.5,
+      textAlign: 'left',
+    },
+  },
+  view: {
+    height: 26,
+    width: 58,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'black',
+    flexDirection: 'row',
+    paddingTop: 4,
+  },
+  text: {
+    fontSize: 12,
+    marginLeft: 15,
+    color: '#4D4639',
+  },
+  icon:{
+    marginTop: 1,
+  },
+});
 export default Navbar;

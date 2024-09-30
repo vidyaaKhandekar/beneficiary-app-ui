@@ -1,17 +1,27 @@
-import { View } from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
 import Navbar from '../Component/Navbar';
 import HeadingText from '../Component/HeadingText';
-import CustomSearchbar from '../Component/CustomSearchbar';
+import ApplicationList from '../Component/ApplicationList';
+import SearchHeader from '../Component/SearchHeader';
 
-const ScholarshipApplication = () => {
+const ScholarshipApplication = ({navigation}) => {
   return (
-    <View>
-      <Navbar/>
-     <HeadingText heading={'My Application'} helperHeading={'Track Your Application Progress'} />
-     <CustomSearchbar/>
-    </View>
+    <ScrollView style={styles.view}>
+      <Navbar />
+      <HeadingText
+        heading={'My Application'}
+        helperHeading={'Track Your Application Progress'}
+      />
+      <SearchHeader />
+      <ApplicationList navigation={navigation} />
+    </ScrollView>
   );
 };
+const styles = StyleSheet.create({
+  view: {
+    backgroundColor: '#FAFAFA',
+    height: '100%',
+  },
+});
 export default ScholarshipApplication;
-
