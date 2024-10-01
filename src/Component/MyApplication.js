@@ -28,9 +28,9 @@ const MyApplication = () => {
         <Text style={styles.rightText}>Applied</Text>
       </View>
       <ScrollView contentContainerStyle={styles.applicationContainer}>
-        {/* Render 7 input fields with labels */}
+
         {myApplicationData?.map((field, index) => (
-          <View key={field} style={styles.inputBlock}>
+          <View key={field.id} style={styles.inputBlock}>
             {/* Label */}
             <Text style={styles.label}>{field.label} </Text>
             {/* Input Field with Icon */}
@@ -46,7 +46,7 @@ const MyApplication = () => {
               <Icon
                 name="checkmark-outline"
                 size={24}
-                color="green"
+                color="#0B7B69"
                 style={styles.applicationIcon}
               />
             </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   nameText: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 5, // Optional space below name
+    marginBottom: 5,
     fontFamily:'Poppins-Regular',
   },
   amountText: {
@@ -91,30 +91,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding:20,
+    paddingHorizontal:16,
     backgroundColor:'#DEE4F9',
+    height:52,
   },
   leftText: {
     fontSize: 14,
-    color: 'black',
+    color: '#1F1B13',
     fontFamily:'Poppins-Regular',
   },
   rightText: {
     fontSize: 10,
     color: '#0B7B69',
     fontFamily:'Poppins-Regular',
+    fontWeight:'bold',
   },
   applicationContainer: {
     padding: 8,
     paddingBottom: 40,
   },
   inputBlock: {
-    marginBottom: 16, // Adds space between each label and input block
+    marginBottom: 16,
   },
   label: {
-    fontSize: 16,
-    marginBottom: 8, // Adds space between the label and input
-    color: '#333',
+    fontSize: 14,
+    marginBottom: 8,
+    color: '#1A1B21',
     fontFamily:'Poppins-Regular',
   },
   inputContainer: {
@@ -124,16 +126,17 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 8,
     padding: 8,
+    height:48,
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 14,
     padding: 8,
    fontFamily:'Poppins-Regular',
   },
   disabledInput: {
-    backgroundColor: '#F0F0F0', // Grayed out background for disabled state
-    color: '#888', // Text color when disabled
+    backgroundColor: '#F0F0F0',
+    color: '#888',
   },
   applicationIcon: {
     marginLeft: 8,

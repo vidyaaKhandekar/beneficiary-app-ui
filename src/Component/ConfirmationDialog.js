@@ -7,10 +7,10 @@ import CustomButton from './CustomButton';
 const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
   const [submitDialogVisible, setSubmitDialogVisible] = React.useState(false);
   const documents = [
-    {id:1,value:'Marksheet(10th)'},
-    {id:2,value:'Income Certificate'},
-    {id:3,value:'Caste Certificate'},
-    {id:4,value:'Domicile Certificate'},
+    {id: 1, value: 'Marksheet(10th)'},
+    {id: 2, value: 'Income Certificate'},
+    {id: 3, value: 'Caste Certificate'},
+    {id: 4, value: 'Domicile Certificate'},
   ];
   // Function to call the parent's function
   const sendCloseDialog = () => {
@@ -45,20 +45,20 @@ const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
             </Text>
 
             {documents?.map((document, index) => (
-                <List.Item
-                  key={index}
-                  title={document}
-                  style={styles.listItem} // Apply styles here for the List.Item container
-                  titleStyle={styles.titleStyle} // Custom font style for the title
-                  left={props => (
-                    <List.Icon
-                      {...props}
-                      icon={'check'} // Change icon based on status
-                      color={'#3C5FDD'}
-                      style={styles.iconStyle} // Custom style for the icon
-                    />
-                  )}
-                />
+              <List.Item
+                key={document.id}
+                title={document.value}
+                style={styles.listItem} // Apply styles here for the List.Item container
+                titleStyle={styles.titleStyle} // Custom font style for the title
+                left={props => (
+                  <List.Icon
+                    {...props}
+                    icon={'check'}
+                    color={'#3C5FDD'}
+                    style={styles.iconStyle}
+                  />
+                )}
+              />
             ))}
           </Dialog.Content>
           <Dialog.Actions style={styles.dialogAction}>

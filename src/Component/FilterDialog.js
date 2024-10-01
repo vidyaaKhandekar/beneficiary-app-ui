@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet,TouchableOpacity} from 'react-native';
 import {
   Button,
   Dialog,
@@ -16,6 +16,7 @@ import {
   Subjet,
 } from '../Constatnt/Constant';
 import DropdownComponent from './DropdownComponent';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const FilterDialog = () => {
 
   const [visible, setVisible] = React.useState(false);
@@ -30,9 +31,20 @@ const FilterDialog = () => {
   const [selectedSubject, setSelectedSubject] = React.useState(null);
   return (
     <View >
-      <Chip style={styles.dialogButton} onPress={showDialog} mode="outlined">
+      {/* <Chip style={styles.dialogButton} onPress={showDialog} mode="outlined">
         Filter
-      </Chip>
+      </Chip> */}
+      <TouchableOpacity onPress={showDialog} style={styles.buttonContainer}>
+      <View style={styles.view}>
+      <Text style={styles.text}>Filter</Text>
+        <MaterialCommunityIcons
+          name="chevron-down"
+          size={15}
+          color={'#4D4639'}
+          style={styles.icon}
+        />
+      </View>
+    </TouchableOpacity>
       <Portal>
         <Dialog
           visible={visible}
@@ -109,6 +121,27 @@ const styles = StyleSheet.create({
   actionButton: {
     width: '100%',
     gap: 8,
+  },
+  view: {
+    height: 32,
+    width: 85,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#4D4639',
+    flexDirection: 'row',
+    paddingTop: 4,
+    marginTop:17,
+    marginRight:2
+  },
+  text: {
+    fontSize: 14,
+    marginLeft: 15,
+    color: '#4D4639',
+    fontFamily:'Poppins-Medium',
+  },
+  icon:{
+    marginTop: 3,
+    marginLeft:5,
   },
 });
 export default FilterDialog;

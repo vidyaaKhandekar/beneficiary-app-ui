@@ -2,11 +2,18 @@ import React from 'react';
 import {Appbar} from 'react-native-paper';
 import {View, Text, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {useNavigation} from '@react-navigation/native';
 const Navbar = () => {
+  const navigation = useNavigation();
+  const handleNavigate = () => {
+    navigation.navigate('Home');
+  };
   return (
     <Appbar.Header style={styles.appBarTheme}>
-      <Appbar.Action icon="menu" onPress={() => {}} />
+      <Appbar.Action
+        icon="menu"
+        onPress={handleNavigate}
+      />
       <Appbar.Content
         title="FAST PASS"
         titleStyle={{
@@ -35,7 +42,7 @@ const styles = StyleSheet.create({
   appBarTheme: {
     marginTop: '24px',
     marginLeft: '12px',
-    backgroundColor:'#FAFAFA',
+    backgroundColor: '#FAFAFA',
   },
   fonts: {
     regular: {
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
     width: 58,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#4D4639',
     flexDirection: 'row',
     paddingTop: 4,
   },
@@ -60,8 +67,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: 15,
     color: '#4D4639',
+    fontFamily: 'Poppins-Medium',
+    fontWeight: 'bold',
   },
-  icon:{
+  icon: {
     marginTop: 1,
   },
 });

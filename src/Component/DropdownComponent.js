@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 
     const renderLabel = () => {
         return (
-          <Text style={[styles.label, isFocus && { color: 'blue' }]}>
+          <Text style={[styles.label, isFocus && styles.focusedLabel.color]}>
             {DropdownLabel}
           </Text>
         );
@@ -18,7 +18,7 @@ import React, { useState } from 'react';
       <View style={styles.container}>
         {renderLabel()}
         <Dropdown
-          style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+          style={[styles.dropdown, isFocus && styles.borderColor]}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           iconStyle={styles.iconStyle}
@@ -80,4 +80,8 @@ import React, { useState } from 'react';
       height: 40,
       fontSize: 16,
     },
+    focusedLabel:{
+       color: 'blue',
+    },
+    borderColor: 'blue',
   });

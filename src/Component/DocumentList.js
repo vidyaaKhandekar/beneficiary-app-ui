@@ -33,15 +33,15 @@ const styles = StyleSheet.create({
     backgroundColor:'#FAFAFA',
   },
   listItem: {
-    height: 61, // Set your desired height
-    borderBottomWidth: 1, // Add bottom border width
+    height: 61,
+    borderBottomWidth: 1,
     borderBottomColor: '#DDDDDD',
   },
   title: {
-    fontFamily: 'Poppins-Regular', // Custom font family for the title
-    fontSize: 14, // Set desired font size
-    fontWeight: '400', // Set font weight
-    color: '#1F1B13', // Set text color (black in this case)
+    fontFamily: 'Poppins-Regular',
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#1F1B13',
   },
 });
 
