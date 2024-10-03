@@ -21,7 +21,7 @@ const DetailScreen = () => {
     <ScrollView contentContainerStyle={styles.container}>
       {details?.map((item, idx) => {
         return (
-          <View key={{idx}} style={styles.sidePadding}>
+          <View key={item.id} style={styles.sidePadding}>
             <Text style={styles.title}>{item?.title}</Text>
             <Text style={styles.amount}>
               <Text style={styles.amountHeading}>₹</Text> {item?.amount}
@@ -39,18 +39,21 @@ const DetailScreen = () => {
               renderItem={renderItem}
               keyExtractor={item => item}
               style={styles}
+              scrollEnabled={false}
             />
             <Text style={styles.descriptionHeading}>Key Points:</Text>
             <FlatList
               data={item.keyPoints}
               renderItem={renderItem}
               keyExtractor={item => item}
+              scrollEnabled={false}
             />
             <Text style={styles.descriptionHeading}>Mandatory Documents:</Text>
             <FlatList
               data={item.document}
               renderItem={renderItem}
               keyExtractor={item => item}
+              scrollEnabled={false}
             />
             <CustomButton
               label="Proceed To Apply"
@@ -71,6 +74,7 @@ const DetailScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {},
   sidePadding: {
     padding: 20,
   },

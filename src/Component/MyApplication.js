@@ -28,7 +28,6 @@ const MyApplication = () => {
         <Text style={styles.rightText}>Applied</Text>
       </View>
       <ScrollView contentContainerStyle={styles.applicationContainer}>
-
         {myApplicationData?.map((field, index) => (
           <View key={field.id} style={styles.inputBlock}>
             {/* Label */}
@@ -59,52 +58,52 @@ const MyApplication = () => {
 const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
-    backgroundColor:'#FAFAFA',
+    backgroundColor: '#FAFAFA',
   },
   dateText: {
     fontSize: 14,
     color: '#555',
-    fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   nameText: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
-    fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   amountText: {
     fontSize: 14,
     color: '#007BFF',
-    fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   stateText: {
     fontSize: 14,
     color: '#888',
-    fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   arrowText: {
     fontSize: 20,
     color: '#007BFF',
-    fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   applicationRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal:16,
-    backgroundColor:'#DEE4F9',
-    height:52,
+    paddingHorizontal: 16,
+    backgroundColor: '#DEE4F9',
+    height: 52,
   },
   leftText: {
     fontSize: 14,
     color: '#1F1B13',
-    fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   rightText: {
     fontSize: 10,
     color: '#0B7B69',
-    fontFamily:'Poppins-Regular',
-    fontWeight:'bold',
+    fontFamily: 'Poppins-Regular',
+    fontWeight: 'bold',
   },
   applicationContainer: {
     padding: 8,
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 8,
     color: '#1A1B21',
-    fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -126,13 +125,12 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 8,
     padding: 8,
-    height:48,
   },
   input: {
     flex: 1,
     fontSize: 14,
     padding: 8,
-   fontFamily:'Poppins-Regular',
+    fontFamily: 'Poppins-Regular',
   },
   disabledInput: {
     backgroundColor: '#F0F0F0',
@@ -141,8 +139,8 @@ const styles = StyleSheet.create({
   applicationIcon: {
     marginLeft: 8,
   },
-  status:{
-    backgroundColor:'#DEE4F9',
+  status: {
+    backgroundColor: '#DEE4F9',
   },
 });
 export default MyApplication;

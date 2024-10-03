@@ -6,14 +6,11 @@ import {useNavigation} from '@react-navigation/native';
 const Navbar = () => {
   const navigation = useNavigation();
   const handleNavigate = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Profile');
   };
   return (
     <Appbar.Header style={styles.appBarTheme}>
-      <Appbar.Action
-        icon="menu"
-        onPress={handleNavigate}
-      />
+      <Appbar.Action icon="menu" onPress={handleNavigate} />
       <Appbar.Content
         title="FAST PASS"
         titleStyle={{

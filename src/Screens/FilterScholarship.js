@@ -22,7 +22,7 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
       {/* Child component contains the FlatList */}
       <Button onPress={dialogVisible}>Show Dialog</Button>
       <Portal>
-        <Dialog visible={dialogVisible} onDismiss={closeDialog} >
+        <Dialog visible={dialogVisible} onDismiss={closeDialog}>
           <View style={styles.dialogHeader}>
             <View>
               <Text style={styles.applicationText}>Filters</Text>

@@ -1,14 +1,15 @@
-import {Text, View, Image, StyleSheet} from 'react-native';
 import React from 'react';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import CustomDropdown from '../Component/CustomDropdown';
 import CustomButton from '../Component/CustomButton';
 
 const Login = ({setIsLoggedIn}) => {
-  //list of languages
   const list = [{label: 'English', value: '1'}];
+
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
+
   return (
     <View style={styles.loginContainer}>
       <View style={styles.logoContainer}>
@@ -16,23 +17,23 @@ const Login = ({setIsLoggedIn}) => {
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.text}>Select Preferred Language</Text>
+        <CustomDropdown
+          testId={'select-language'}
+          label="Select Language"
+          data={list}
+          helperText={'You Can Change It Later'}
+        />
         <CustomButton
           label="Sign In / Sign Up with DigiLocker"
           padding={2}
           width="100%"
           handleClick={handleLogin}
         />
-        <CustomDropdown
-          testId={'select-language'}
-          label="Select Language"
-          list={list}
-          helperText={'You Can Change It Later'}
-        />
-      {/* <View style={{height:250}}><Text>This is login</Text></View> */}
       </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   loginContainer: {
     backgroundColor: '#121943',
@@ -63,4 +64,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
 export default Login;

@@ -9,10 +9,9 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
 const data = [
   {
-    id: '1',
+    id: 1,
     date: '12 September 2024',
     title: 'Pre-Matric Scholarship-SC',
     subTitle: 'Ministry of Social Justice',
@@ -24,7 +23,7 @@ const data = [
     imageUrl: 'https://via.placeholder.com/50',
   },
   {
-    id: '2',
+    id: 2,
     date: '12 September 2024',
     title: 'Pre-Matric Scholarship-ST',
     subTitle: 'Ministry of Social Justice',
@@ -37,7 +36,7 @@ const data = [
     imageUrl: 'https://via.placeholder.com/50',
   },
   {
-    id: '3',
+    id: 3,
     date: '12 September 2024',
     title: 'Pre-Matric Scholarship-ST',
     subTitle: 'Ministry of Social Justice',
@@ -74,7 +73,9 @@ const CardItem = ({item, navigation}) => (
             // <Chip key={idx}  style={styles.chip}textStyle={styles.chipColor}>
             //   {val}
             // </Chip>
-            <Text style={styles.chipColor}>{val}</Text>
+            <Text key={idx} style={styles.chipColor}>
+              {val}
+            </Text>
           );
         })}
       </View>
@@ -97,21 +98,20 @@ const ScholarshipCard = ({navigation}) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.applicationContainer}>
-      <FlatList
-        data={data}
-        renderItem={({item}) => (
-          <CardItem item={item} navigation={navigation} />
-        )}
-        keyExtractor={item => item.id.toString()} // Make sure the key is unique
-        contentContainerStyle={styles.listContainer}
-        // onEndReached={loadData}
-        onEndReachedThreshold={0.5} // Trigger loading more when the scroll is halfway through the list
-        // ListFooterComponent={renderFooter} // Loading spinner when fetching more data
-      />
+    // <ScrollView contentContainerStyle={styles.applicationContainer}>
+    <FlatList
+      data={data}
+      renderItem={({item}) => (
+        <CardItem item={item} key={item.id} navigation={navigation} />
+      )}
+      keyExtractor={item => item.id.toString()} // Make sure the key is unique
+      contentContainerStyle={styles.listContainer}
+      // onEndReached={loadData}
+      onEndReachedThreshold={0.5} // Trigger loading more when the scroll is halfway through the list
+      // ListFooterComponent={renderFooter} // Loading spinner when fetching more data
+    />
 
-      {/* Child component contains the Dialog */}
-    </ScrollView>
+    // </ScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -227,7 +227,6 @@ const styles = StyleSheet.create({
     color: '#0037B9',
     fontSize: 14,
     marginRight: 8,
-
   },
   viewDetails: {
     flex: 1,
