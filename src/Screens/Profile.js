@@ -6,8 +6,9 @@ import DocumentList from '../Component/DocumentList';
 import {documentName} from '../Constatnt/Constant';
 import HeadingText from '../Component/HeadingText';
 import CustomButton from '../Component/CustomButton';
-
-const Profile = ({navigation}) => {
+import {useNavigation} from '@react-navigation/native';
+const Profile = () => {
+  const navigation = useNavigation();
   const handleOnPress = () => {
     navigation.navigate('Search');
   };

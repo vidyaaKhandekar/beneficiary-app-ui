@@ -1,10 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
 import {List, IconButton} from 'react-native-paper';
-
+import PropTypes from 'prop-types';
 import {TrackApplicationList} from '../Constatnt/Constant';
-
-// Moved StatusIcon outside of ApplicationList to avoid component re-creation on every render
+import {useNavigation} from '@react-navigation/native';
 const StatusIcon = ({status}) => {
   return (
     <View style={styles.statusContainer}>
@@ -17,8 +16,12 @@ const StatusIcon = ({status}) => {
     </View>
   );
 };
+StatusIcon.propTypes = {
+  status: PropTypes.string.isRequired,
+};
 
-const ApplicationList = ({navigation}) => {
+const ApplicationList = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <List.Section>
@@ -27,7 +30,7 @@ const ApplicationList = ({navigation}) => {
           const applications = item[key];
 
           return (
-            <View key={index} style={styles.sectionContainer}>
+            <View key={key} style={styles.sectionContainer}>
               <View style={styles.headerContainer}>
                 <IconButton
                   icon={key === 'Approved' ? 'check-circle' : 'close-circle'}
@@ -43,7 +46,7 @@ const ApplicationList = ({navigation}) => {
               <View style={styles.divider} />
               {applications.map((app, appIndex) => (
                 <List.Item
-                  key={appIndex}
+                  key={app.applicationNo}
                   title={app.applicationNo}
                   style={styles.listItem}
                   right={() => app.status && <StatusIcon status={app.status} />}

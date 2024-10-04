@@ -4,8 +4,9 @@ import Navbar from '../Component/Navbar';
 import HeadingText from '../Component/HeadingText';
 import ApplicationList from '../Component/ApplicationList';
 import SearchHeader from '../Component/SearchHeader';
-
-const ScholarshipApplication = ({navigation}) => {
+import {useNavigation} from '@react-navigation/native';
+const ScholarshipApplication = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView style={styles.view}>
       <Navbar />

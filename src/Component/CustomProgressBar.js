@@ -1,22 +1,28 @@
 import * as React from 'react';
-import { View,StyleSheet } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
-const CustomProgressBar = ({ totalDocuments, presentDocuments}) =>{
+import {View, StyleSheet} from 'react-native';
+import {ProgressBar} from 'react-native-paper';
+import PropTypes from 'prop-types';
+
+const CustomProgressBar = ({totalDocuments, presentDocuments}) => {
   const progress = totalDocuments > 0 ? presentDocuments / totalDocuments : 0;
 
   return (
-
-  <View
-    style={styles.progressBarStyle}
-  >
-    <ProgressBar
-      progress={progress}
-      color={styles.progressBarStyle.progressBarColor.primaryColor}
-      style={styles.progressBarStyle.progressBar} // To ensure the progress bar has rounded corners
-    />
-  </View>
-);
+    <View style={styles.progressBarStyle}>
+      <ProgressBar
+        progress={progress}
+        color={styles.progressBarStyle.progressBarColor.primaryColor}
+        style={styles.progressBarStyle.progressBar}
+      />
+    </View>
+  );
 };
+
+// Add propTypes validation
+CustomProgressBar.propTypes = {
+  totalDocuments: PropTypes.number.isRequired,
+  presentDocuments: PropTypes.number.isRequired,
+};
+
 const styles = StyleSheet.create({
   progressBarStyle: {
     width: '90%',
@@ -33,4 +39,5 @@ const styles = StyleSheet.create({
     },
   },
 });
+
 export default CustomProgressBar;

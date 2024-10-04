@@ -1,14 +1,8 @@
 import * as React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import PropTypes from 'prop-types';
+import {useNavigation} from '@react-navigation/native';
 const data = [
   {
     id: 1,
@@ -89,9 +83,24 @@ const CardItem = ({item, navigation}) => (
     </View>
   </View>
 );
-const ScholarshipCard = ({navigation}) => {
+CardItem.propTypes = {
+  item: PropTypes.shape({
+    date: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    subTitle: PropTypes.string.isRequired,
+    benefitAmount: PropTypes.string.isRequired,
+    eligible: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    address: PropTypes.string,
+    imageUrl: PropTypes.string,
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+const ScholarshipCard = () => {
   const [dialogVisible, setDialogVisible] = React.useState(false);
-
+  const navigation = useNavigation();
   // Function that will be passed to child and called by the child
   const closeDialog = value => {
     setDialogVisible(value);
@@ -138,9 +147,10 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2, // For Android shadow
   },
+  /*************  ✨ Codeium Command 🌟  *************/
   topRightText: {
     position: 'absolute', // Position the text absolutely
-    top: 2, // Adjust distance from the top of the card
+    top: 0, // Adjust distance from the top of the card
     right: 0, // Align the text next to the right border
     fontSize: 12,
     fontWeight: '500', // Font weight as string
@@ -153,6 +163,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 2, // Set a fixed width for the text box
   },
+  /******  b59d45e6-e8db-43ac-bc69-219141106001  *******/
   image: {
     width: 50,
     height: 50,

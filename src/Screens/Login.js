@@ -2,9 +2,15 @@ import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import CustomDropdown from '../Component/CustomDropdown';
 import CustomButton from '../Component/CustomButton';
+import PropTypes from 'prop-types'; // Import prop-types for prop validation
 
 const Login = ({setIsLoggedIn}) => {
-  const list = [{label: 'English', value: '1'}];
+  // Dynamic list for language selection; expand as needed
+  const languageOptions = [
+    {label: 'English', value: '1'},
+    {label: 'Hindi', value: '2'},
+    {label: 'Spanish', value: '3'}, // Example additional languages
+  ];
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -20,18 +26,25 @@ const Login = ({setIsLoggedIn}) => {
         <CustomDropdown
           testId={'select-language'}
           label="Select Language"
-          data={list}
+          data={languageOptions}
           helperText={'You Can Change It Later'}
+          accessibilityLabel="Language selection dropdown"
         />
         <CustomButton
           label="Sign In / Sign Up with DigiLocker"
           padding={2}
-          width="100%"
+          width="92%"
           handleClick={handleLogin}
+          accessibilityLabel="Sign In or Sign Up with DigiLocker"
         />
+        <View style={{height: 220}} />
       </View>
     </View>
   );
+};
+
+Login.propTypes = {
+  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -46,7 +59,11 @@ const styles = StyleSheet.create({
     height: '40%',
     justifyContent: 'flex-end',
   },
-  logo: {marginBottom: 90, width: 240, height: 78},
+  logo: {
+    marginBottom: 90,
+    width: 240,
+    height: 78,
+  },
   inputContainer: {
     height: '60%',
     width: '100%',

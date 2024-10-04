@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, Dialog, Portal, Text, IconButton} from 'react-native-paper';
-
+import PropTypes from 'prop-types';
 const SubmitDialog = ({dialogVisible, closeSubmit}) => {
   // Function to call the parent's function
   const sendCloseDialog = () => {
@@ -49,6 +49,10 @@ const SubmitDialog = ({dialogVisible, closeSubmit}) => {
       </Portal>
     </View>
   );
+};
+SubmitDialog.propTypes = {
+  dialogVisible: PropTypes.bool.isRequired, // Ensure that dialogVisible is a required boolean
+  closeDialog: PropTypes.func.isRequired, // Ensure that closeDialog is a required function
 };
 const styles = StyleSheet.create({
   container: {backgroundColor: '#FAFAFA'},

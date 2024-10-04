@@ -2,18 +2,17 @@ import React, {useState} from 'react';
 import {View, Text, Alert, StyleSheet} from 'react-native';
 import {Button, IconButton} from 'react-native-paper';
 import DocumentPicker from 'react-native-document-picker';
-const Upload = ({fileLimit = 2}) => {
-  // File limit passed as a prop, default to 2 files
-  const [fileResponses, setFileResponses] = useState([]); // Array to store selected files
+import PropTypes from 'prop-types'; // Importing prop-types
 
-  // Function to handle file selection
+const Upload = ({fileLimit = 2}) => {
+  const [fileResponses, setFileResponses] = useState([]);
+
   const handleDocumentSelection = async () => {
     try {
       const result = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
 
-      // Add selected file to the array, allowing only up to fileLimit
       if (fileResponses.length < fileLimit) {
         setFileResponses([...fileResponses, result[0]]);
       } else {
@@ -31,7 +30,6 @@ const Upload = ({fileLimit = 2}) => {
     }
   };
 
-  // Function to clear a specific file (based on index)
   const clearFile = index => {
     const updatedFileResponses = fileResponses.filter((_, i) => i !== index);
     setFileResponses(updatedFileResponses);
@@ -39,7 +37,6 @@ const Upload = ({fileLimit = 2}) => {
 
   return (
     <View style={styles.uploadContainer}>
-      {/* Display selected files and remove icons */}
       {fileResponses.length > 0 && (
         <View style={styles.uplodedFiles}>
           {fileResponses.map((file, index) => (
@@ -47,9 +44,9 @@ const Upload = ({fileLimit = 2}) => {
               <Text style={styles.fileName}>{` ${file.name}`}</Text>
               <IconButton
                 icon="close"
-                color="#CC7914" // Error color for removing the file
+                color="#CC7914"
                 size={24}
-                onPress={() => clearFile(index)} // Remove the specific file
+                onPress={() => clearFile(index)}
                 style={styles.removeButton}
               />
             </View>
@@ -57,11 +54,10 @@ const Upload = ({fileLimit = 2}) => {
         </View>
       )}
 
-      {/* Button to upload a file */}
       <Button
         mode="text"
         onPress={handleDocumentSelection}
-        disabled={fileResponses.length >= fileLimit} // Disable button when fileLimit is reached
+        disabled={fileResponses.length >= fileLimit}
         icon={'plus'}
         style={styles.uploadButton}>
         {fileResponses.length >= fileLimit
@@ -73,6 +69,11 @@ const Upload = ({fileLimit = 2}) => {
     </View>
   );
 };
+
+Upload.propTypes = {
+  fileLimit: PropTypes.number,
+};
+
 const styles = StyleSheet.create({
   uploadContainer: {
     flex: 1,
@@ -101,4 +102,5 @@ const styles = StyleSheet.create({
     // Add styles for the upload button
   },
 });
+
 export default Upload;

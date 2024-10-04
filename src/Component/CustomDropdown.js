@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
+import PropTypes from 'prop-types'; // Import PropTypes
 
 const CustomDropdown = ({
   DropdownLabel = 'Select',
@@ -21,7 +22,6 @@ const CustomDropdown = ({
 
   return (
     <View style={styles.container}>
-      {/* {renderLabel()} */}
       <Dropdown
         testID={testId}
         style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
@@ -32,7 +32,7 @@ const CustomDropdown = ({
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={'Select'}
+        placeholder={placeholderLabel}
         value={value}
         onChange={item => {
           setValue(item?.value);
@@ -41,6 +41,26 @@ const CustomDropdown = ({
       />
     </View>
   );
+};
+
+// Add propTypes validation
+CustomDropdown.propTypes = {
+  DropdownLabel: PropTypes.string,
+  placeholderLabel: PropTypes.string,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  testId: PropTypes.string,
+};
+
+// Define default values for props (optional)
+CustomDropdown.defaultProps = {
+  DropdownLabel: 'Select',
+  placeholderLabel: 'Select',
+  testId: '',
 };
 
 export default CustomDropdown;

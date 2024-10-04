@@ -3,10 +3,11 @@ import React from 'react';
 import Navbar from '../Component/Navbar';
 import HeadingText from '../Component/HeadingText';
 import ScholarshipCard from '../Component/ScholarshipCard';
-
+import {useNavigation} from '@react-navigation/native';
 import SearchHeader from '../Component/SearchHeader';
 
-const ScholarshipListing = ({navigation}) => {
+const ScholarshipListing = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.textContainer}>
       <Navbar />

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Dialog, Portal, Text, IconButton} from 'react-native-paper';
-
 import CustomDropdown from '../Component/CustomDropdown';
 import {
   EducationLevel,
@@ -10,6 +9,7 @@ import {
   BenefitAmount,
   Subjet,
 } from '../Constatnt/Constant';
+import PropTypes from 'prop-types'; // Import prop-types for prop validation
 
 const FilterScholarship = ({dialogVisible, closeDialog}) => {
   const [selectedEducation, setSelectedEducation] = React.useState(null);
@@ -17,10 +17,9 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
   const [selectedIncome, setSelectedIncome] = React.useState(null);
   const [selectedAmount, setSelectedAmount] = React.useState(null);
   const [selectedSubject, setSelectedSubject] = React.useState(null);
+
   return (
     <View>
-      {/* Child component contains the FlatList */}
-      <Button onPress={dialogVisible}>Show Dialog</Button>
       <Portal>
         <Dialog visible={dialogVisible} onDismiss={closeDialog}>
           <View style={styles.dialogHeader}>
@@ -34,7 +33,7 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
               testId={'select-education'}
               items={EducationLevel}
               placeholder="Select Education"
-              onChangeValue={value => setSelectedEducation(value)} // Handle value change
+              onChangeValue={setSelectedEducation} // Directly set the selected value
               defaultValue={selectedEducation}
               zIndex={5000}
               containerStyle={styles.dropdownContainer}
@@ -43,7 +42,7 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
               testId={'select-gender'}
               items={Gender}
               placeholder="Select Gender"
-              onChangeValue={value => setSelectedGender(value)} // Handle value change
+              onChangeValue={setSelectedGender}
               defaultValue={selectedGender}
               zIndex={5000}
               containerStyle={styles.dropdownContainer}
@@ -51,8 +50,8 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
             <CustomDropdown
               testId={'select-income'}
               items={IncomeRange}
-              placeholder="Income range"
-              onChangeValue={value => setSelectedIncome(value)} // Handle value change
+              placeholder="Income Range"
+              onChangeValue={setSelectedIncome}
               defaultValue={selectedIncome}
               zIndex={5000}
               containerStyle={styles.dropdownContainer}
@@ -60,8 +59,8 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
             <CustomDropdown
               testId={'select-benefit-amount'}
               items={BenefitAmount}
-              placeholder="Benefit amount"
-              onChangeValue={value => setSelectedAmount(value)} // Handle value change
+              placeholder="Benefit Amount"
+              onChangeValue={setSelectedAmount}
               defaultValue={selectedAmount}
               zIndex={5000}
               containerStyle={styles.dropdownContainer}
@@ -70,14 +69,13 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
               testId={'select-subject'}
               items={Subjet}
               placeholder="Subject"
-              onChangeValue={value => setSelectedSubject(value)} // Handle value change
+              onChangeValue={setSelectedSubject}
               defaultValue={selectedSubject}
               zIndex={5000}
               containerStyle={styles.dropdownContainer}
             />
           </Dialog.Content>
           <Dialog.Actions>
-            {/* Applying styles to the Button */}
             <Button
               testId={'click-done-filter'}
               mode="contained"
@@ -94,8 +92,14 @@ const FilterScholarship = ({dialogVisible, closeDialog}) => {
     </View>
   );
 };
+
+// Adding prop types for FilterScholarship component
+FilterScholarship.propTypes = {
+  dialogVisible: PropTypes.bool.isRequired, // Prop to control dialog visibility
+  closeDialog: PropTypes.func.isRequired, // Function to close the dialog
+};
+
 const styles = StyleSheet.create({
-  container: {backgroundColor: ''},
   dialogHeader: {
     height: 70,
     paddingVertical: 12,
@@ -115,17 +119,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#41424B',
   },
-  statusText: {
-    fontFamily: 'Poppins-Regular',
-    fontSize: 14,
-    fontWeight: '400',
-    lineHeight: 20,
-    letterSpacing: 0.25,
-    textAlign: 'left',
-    color: '#41424B',
-  },
-  dialogContent: {
-    marginVertical: 16,
+  dropdownContainer: {
+    marginVertical: 8,
   },
 });
+
 export default FilterScholarship;

@@ -3,7 +3,9 @@ import React from 'react';
 import HeadingText from './HeadingText';
 import Navbar from './Navbar';
 import DetailScreen from './DetailScreen';
-const ScholarshipDetails = ({navigation}) => {
+import {useNavigation} from '@react-navigation/native';
+const ScholarshipDetails = () => {
+  const navigation = useNavigation();
   const handleBack = () => {
     navigation.navigate('ScholarshipListing');
   };
@@ -15,14 +17,14 @@ const ScholarshipDetails = ({navigation}) => {
         back={true}
         handleBack={handleBack}
       />
-      <DetailScreen/>
+      <DetailScreen />
     </View>
   );
 };
 const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
-    backgroundColor:'#FAFAFA',
+    backgroundColor: '#FAFAFA',
   },
 });
 

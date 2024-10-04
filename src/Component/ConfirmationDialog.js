@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {Dialog, Portal, Text, IconButton, List} from 'react-native-paper';
 import SubmitDialog from './SubmitDialog';
 import CustomButton from './CustomButton';
-
+import PropTypes from 'prop-types';
 const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
   const [submitDialogVisible, setSubmitDialogVisible] = React.useState(false);
   const documents = [
@@ -86,6 +86,10 @@ const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
       />
     </View>
   );
+};
+ConfirmationDialog.propTypes = {
+  dialogVisible: PropTypes.bool, // Ensure that dialogVisible is a required boolean
+  closeDialog: PropTypes.func.isRequired, // Ensure that closeDialog is a required function
 };
 const styles = StyleSheet.create({
   container: {backgroundColor: '#FAFAFA'},

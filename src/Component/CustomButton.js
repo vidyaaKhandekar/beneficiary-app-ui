@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Button} from 'react-native-paper';
 import {StyleSheet, View, Text} from 'react-native';
+import PropTypes from 'prop-types'; // Import PropTypes
+
 const CustomButton = ({
   testId,
   label = 'Click me',
@@ -30,6 +32,20 @@ const CustomButton = ({
     </Button>
   </View>
 );
+
+CustomButton.propTypes = {
+  testId: PropTypes.string,
+  label: PropTypes.string,
+  mode: PropTypes.string,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  borderRadius: PropTypes.number,
+  handleClick: PropTypes.func.isRequired,
+  marginTop: PropTypes.number,
+  padding: PropTypes.number,
+  borderColor: PropTypes.string,
+};
+
 const styles = StyleSheet.create({
   view: {
     flex: 1,
@@ -39,9 +55,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     fontFamily: 'Poppins-Medium',
-    margin:0,
-    padding:0,
-   height:50,
+    margin: 0,
+    padding: 0,
+    height: 50,
   },
 });
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Avatar, IconButton, Text} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
+import PropTypes from 'prop-types';
 
 const LeftContent = props => (
   <Avatar.Icon {...props} icon="account" size={50} style={styles.avatar} />
@@ -8,7 +9,6 @@ const LeftContent = props => (
 
 const HeadingText = ({
   benificiary,
-  icon,
   heading,
   helperHeading,
   back,
@@ -37,12 +37,20 @@ const HeadingText = ({
   </View>
 );
 
+HeadingText.propTypes = {
+  benificiary: PropTypes.bool,
+  heading: PropTypes.string.isRequired,
+  helperHeading: PropTypes.string,
+  back: PropTypes.bool,
+  handleBack: PropTypes.func,
+};
+
 const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor:'#FAFAFA',
+    backgroundColor: '#FAFAFA',
   },
   title: {
     fontFamily: 'Poppins-Regular',
