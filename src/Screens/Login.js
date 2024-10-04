@@ -3,7 +3,6 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 import CustomButton from '../Component/CustomButton';
 import PropTypes from 'prop-types';
 import DropdownComponent from '../Component/DropdownComponent';
-import {EducationLevel} from '../Constatnt/Constant';
 const Login = ({setIsLoggedIn}) => {
   // Dynamic list for language selection; expand as needed
   const languageOptions = [{label: 'English', value: '1'}];

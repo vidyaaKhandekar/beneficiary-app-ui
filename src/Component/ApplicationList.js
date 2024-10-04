@@ -4,7 +4,7 @@ import {List, IconButton} from 'react-native-paper';
 import PropTypes from 'prop-types';
 import {TrackApplicationList} from '../Constatnt/Constant';
 import {useNavigation} from '@react-navigation/native';
-const StatusIcon = ({status}) => {
+const statusIcon = status => {
   return (
     <View style={styles.statusContainer}>
       <IconButton
@@ -16,7 +16,7 @@ const StatusIcon = ({status}) => {
     </View>
   );
 };
-StatusIcon.propTypes = {
+statusIcon.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
@@ -49,7 +49,7 @@ const ApplicationList = () => {
                   key={app.applicationNo}
                   title={app.applicationNo}
                   style={styles.listItem}
-                  right={() => app.status && <StatusIcon status={app.status} />}
+                  right={() => statusIcon(app.status)}
                   onPress={() => {
                     navigation.navigate('MyApplication');
                   }}
