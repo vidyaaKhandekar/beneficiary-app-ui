@@ -62,12 +62,12 @@ const CardItem = ({item, navigation}) => (
       </Text>
       {/* Simple Chip */}
       <View style={styles.chipContainer}>
-        {item?.eligible?.map((val, idx) => {
+        {item?.eligible?.map(val => {
           return (
             // <Chip key={idx}  style={styles.chip}textStyle={styles.chipColor}>
             //   {val}
             // </Chip>
-            <Text key={idx} style={styles.chipColor}>
+            <Text key={val} style={styles.chipColor}>
               {val}
             </Text>
           );

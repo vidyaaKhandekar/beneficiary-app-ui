@@ -61,7 +61,7 @@ export const Subjet = [
   {id: 1, label: 'English', value: 'english'},
   {id: 2, label: 'Science', value: 'science'},
 ];
-const Data = [
+export const Data = [
   {
     id: '1',
     date: '12 September 2024',

@@ -1,13 +1,6 @@
 import * as React from 'react';
-import {View, StyleSheet,TouchableOpacity} from 'react-native';
-import {
-  Button,
-  Dialog,
-  Portal,
-  Text,
-  Chip,
-  IconButton,
-} from 'react-native-paper';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Button, Dialog, Portal, Text, IconButton} from 'react-native-paper';
 import {
   EducationLevel,
   Gender,
@@ -18,7 +11,6 @@ import {
 import DropdownComponent from './DropdownComponent';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const FilterDialog = () => {
-
   const [visible, setVisible] = React.useState(false);
 
   const showDialog = () => setVisible(true);
@@ -30,21 +22,18 @@ const FilterDialog = () => {
   const [selectedAmount, setSelectedAmount] = React.useState(null);
   const [selectedSubject, setSelectedSubject] = React.useState(null);
   return (
-    <View >
-      {/* <Chip style={styles.dialogButton} onPress={showDialog} mode="outlined">
-        Filter
-      </Chip> */}
+    <View>
       <TouchableOpacity onPress={showDialog} style={styles.buttonContainer}>
-      <View style={styles.view}>
-      <Text style={styles.text}>Filter</Text>
-        <MaterialCommunityIcons
-          name="chevron-down"
-          size={15}
-          color={'#4D4639'}
-          style={styles.icon}
-        />
-      </View>
-    </TouchableOpacity>
+        <View style={styles.view}>
+          <Text style={styles.text}>Filter</Text>
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={15}
+            color={'#4D4639'}
+            style={styles.icon}
+          />
+        </View>
+      </TouchableOpacity>
       <Portal>
         <Dialog
           visible={visible}
@@ -73,7 +62,10 @@ const FilterDialog = () => {
             <DropdownComponent DropdownLabel="Subject" Data={Subjet} />
           </Dialog.Content>
           <Dialog.Actions>
-            <Button mode="contained" onPress={hideDialog} style={styles.actionButton}>
+            <Button
+              mode="contained"
+              onPress={hideDialog}
+              style={styles.actionButton}>
               Apply Filter
             </Button>
           </Dialog.Actions>
@@ -130,18 +122,18 @@ const styles = StyleSheet.create({
     borderColor: '#4D4639',
     flexDirection: 'row',
     paddingTop: 4,
-    marginTop:17,
-    marginRight:2
+    marginTop: 17,
+    marginRight: 2,
   },
   text: {
     fontSize: 14,
     marginLeft: 15,
     color: '#4D4639',
-    fontFamily:'Poppins-Medium',
+    fontFamily: 'Poppins-Medium',
   },
-  icon:{
+  icon: {
     marginTop: 3,
-    marginLeft:5,
+    marginLeft: 5,
   },
 });
 export default FilterDialog;

@@ -1,16 +1,12 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
-import CustomDropdown from '../Component/CustomDropdown';
 import CustomButton from '../Component/CustomButton';
-import PropTypes from 'prop-types'; // Import prop-types for prop validation
-
+import PropTypes from 'prop-types';
+import DropdownComponent from '../Component/DropdownComponent';
+import {EducationLevel} from '../Constatnt/Constant';
 const Login = ({setIsLoggedIn}) => {
   // Dynamic list for language selection; expand as needed
-  const languageOptions = [
-    {label: 'English', value: '1'},
-    {label: 'Hindi', value: '2'},
-    {label: 'Spanish', value: '3'}, // Example additional languages
-  ];
+  const languageOptions = [{label: 'English', value: '1'}];
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -23,12 +19,9 @@ const Login = ({setIsLoggedIn}) => {
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.text}>Select Preferred Language</Text>
-        <CustomDropdown
-          testId={'select-language'}
-          label="Select Language"
-          data={languageOptions}
-          helperText={'You Can Change It Later'}
-          accessibilityLabel="Language selection dropdown"
+        <DropdownComponent
+          DropdownLabel="Select Language"
+          Data={languageOptions}
         />
         <CustomButton
           label="Sign In / Sign Up with DigiLocker"

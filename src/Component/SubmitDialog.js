@@ -52,7 +52,7 @@ const SubmitDialog = ({dialogVisible, closeSubmit}) => {
 };
 SubmitDialog.propTypes = {
   dialogVisible: PropTypes.bool.isRequired, // Ensure that dialogVisible is a required boolean
-  closeDialog: PropTypes.func.isRequired, // Ensure that closeDialog is a required function
+  closeSubmit: PropTypes.func.isRequired, // Ensure that closeDialog is a required function
 };
 const styles = StyleSheet.create({
   container: {backgroundColor: '#FAFAFA'},

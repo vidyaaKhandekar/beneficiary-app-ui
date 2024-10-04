@@ -40,7 +40,7 @@ const Upload = ({fileLimit = 2}) => {
       {fileResponses.length > 0 && (
         <View style={styles.uplodedFiles}>
           {fileResponses.map((file, index) => (
-            <View key={index} style={styles.fileRow}>
+            <View key={file.fileName} style={styles.fileRow}>
               <Text style={styles.fileName}>{` ${file.name}`}</Text>
               <IconButton
                 icon="close"
