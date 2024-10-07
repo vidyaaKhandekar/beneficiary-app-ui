@@ -1,8 +1,17 @@
 import * as React from 'react';
 import {List} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types';
 
+const LeftIcon = (props, Status) => {
+  return (
+    <List.Icon
+      {...props}
+      icon={Status === true ? 'check-circle' : 'alert-circle'}
+      color={Status === true ? '#0B7B69' : '#EDA145'}
+    />
+  );
+};
 const DocumentList = ({documents}) => (
   <View style={styles.container}>
     {documents.map(document => (
@@ -13,13 +22,7 @@ const DocumentList = ({documents}) => (
           style={styles.listItem}
           titleStyle={styles.title}
           descriptionStyle={styles.description}
-          left={props => (
-            <List.Icon
-              {...props}
-              icon={document.Status === true ? 'check-circle' : 'alert-circle'} // Change icon based on status
-              color={document.Status === true ? '#0B7B69' : '#EDA145'} // Use your theme colors
-            />
-          )}
+          left={props => LeftIcon(props, document.Status)}
         />
       </React.Fragment>
     ))}

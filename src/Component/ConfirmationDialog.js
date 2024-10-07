@@ -4,6 +4,17 @@ import {Dialog, Portal, Text, IconButton, List} from 'react-native-paper';
 import SubmitDialog from './SubmitDialog';
 import CustomButton from './CustomButton';
 import PropTypes from 'prop-types';
+
+const LeftIcon = props => {
+  return (
+    <List.Icon
+      {...props}
+      icon={'check'}
+      color={'#3C5FDD'}
+      style={styles.iconStyle}
+    />
+  );
+};
 const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
   const [submitDialogVisible, setSubmitDialogVisible] = React.useState(false);
   const documents = [
@@ -44,20 +55,13 @@ const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
               application.
             </Text>
 
-            {documents?.map((document, index) => (
+            {documents?.map(document => (
               <List.Item
                 key={document.id}
                 title={document.value}
                 style={styles.listItem} // Apply styles here for the List.Item container
                 titleStyle={styles.titleStyle} // Custom font style for the title
-                left={props => (
-                  <List.Icon
-                    {...props}
-                    icon={'check'}
-                    color={'#3C5FDD'}
-                    style={styles.iconStyle}
-                  />
-                )}
+                left={props => LeftIcon(props)}
               />
             ))}
           </Dialog.Content>

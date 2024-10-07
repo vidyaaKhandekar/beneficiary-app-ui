@@ -9,7 +9,7 @@ import {
   Subjet,
 } from '../Constatnt/Constant';
 import DropdownComponent from './DropdownComponent';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 const FilterDialog = () => {
   const [visible, setVisible] = React.useState(false);
 
@@ -26,9 +26,15 @@ const FilterDialog = () => {
       <TouchableOpacity onPress={showDialog} style={styles.buttonContainer}>
         <View style={styles.view}>
           <Text style={styles.text}>Filter</Text>
-          <MaterialCommunityIcons
-            name="chevron-down"
+          {/* <MaterialCommunityIcons
+            name="arrow-drop-down"
             size={15}
+            color={'#4D4639'}
+            style={styles.icon}
+          /> */}
+          <Icon
+            name="arrow-drop-down" // Custom icon based on focus state
+            size={18}
             color={'#4D4639'}
             style={styles.icon}
           />
@@ -77,7 +83,7 @@ const FilterDialog = () => {
 const styles = StyleSheet.create({
   container: {backgroundColor: '#FAFAFA'},
   dialogHeader: {
-    height: 70,
+    height: 60,
     paddingHorizontal: 8,
     paddingLeft: 16,
     flexDirection: 'row',
@@ -93,6 +99,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.15,
     textAlign: 'left',
     color: '#41424B',
+    paddingTop: 15,
   },
   statusText: {
     fontFamily: 'Poppins-Regular',
@@ -132,7 +139,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
   },
   icon: {
-    marginTop: 3,
+    marginTop: 2,
     marginLeft: 5,
   },
 });

@@ -14,6 +14,7 @@ const CustomButton = ({
   marginTop = 0,
   padding = 0,
   borderColor = '#3C5FDD',
+  marginBottom = 0,
 }) => (
   <View style={styles.view}>
     <Button
@@ -27,6 +28,7 @@ const CustomButton = ({
         marginTop,
         padding,
         borderColor,
+        marginBottom,
       }}>
       <Text style={styles.text}>{label}</Text>
     </Button>

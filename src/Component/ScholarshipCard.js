@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import {useNavigation} from '@react-navigation/native';
+import CustomButton from './CustomButton';
 const data = [
   {
     id: 1,
@@ -101,6 +102,7 @@ CardItem.propTypes = {
 const ScholarshipCard = () => {
   const [dialogVisible, setDialogVisible] = React.useState(false);
   const navigation = useNavigation();
+  const [hasMore, setHasMore] = React.useState(true);
   // Function that will be passed to child and called by the child
   const closeDialog = value => {
     setDialogVisible(value);
@@ -108,6 +110,7 @@ const ScholarshipCard = () => {
 
   return (
     // <ScrollView contentContainerStyle={styles.applicationContainer}>
+
     <FlatList
       data={data}
       renderItem={({item}) => (
@@ -118,6 +121,17 @@ const ScholarshipCard = () => {
       // onEndReached={loadData}
       onEndReachedThreshold={0.5} // Trigger loading more when the scroll is halfway through the list
       // ListFooterComponent={renderFooter} // Loading spinner when fetching more data
+      ListFooterComponent={
+        hasMore ? (
+          <CustomButton
+            label="Load More"
+            marginTop={18}
+            height={40}
+            width={'100%'}
+            marginBottom={18}
+          />
+        ) : null
+      }
     />
 
     // </ScrollView>
@@ -129,12 +143,12 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   listContainer: {
-    padding: 10,
+    padding: 22,
     marginTop: 8,
   },
 
   card: {
-    flexDirection: 'row', // Align items in a row
+    flexDirection: 'row',
     alignItems: 'center',
     paddingTop: 35,
     paddingLeft: 20,
@@ -145,25 +159,24 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    elevation: 2, // For Android shadow
+    elevation: 2,
   },
-  /*************  ✨ Codeium Command 🌟  *************/
   topRightText: {
-    position: 'absolute', // Position the text absolutely
-    top: 0, // Adjust distance from the top of the card
-    right: 0, // Align the text next to the right border
+    position: 'absolute',
+    top: 0,
+    right: 0,
     fontSize: 12,
-    fontWeight: '500', // Font weight as string
+    fontWeight: '500',
     color: 'white',
     backgroundColor: '#0B7B69',
-    height: 21, // Fix height for consistency
+    height: 21,
     width: 140,
-    borderTopRightRadius: 10, // Radius for top-right corner
+    borderTopRightRadius: 10,
     borderBottomLeftRadius: 10,
     paddingLeft: 10,
-    paddingTop: 2, // Set a fixed width for the text box
+    paddingTop: 2,
   },
-  /******  b59d45e6-e8db-43ac-bc69-219141106001  *******/
+
   image: {
     width: 50,
     height: 50,
@@ -171,34 +184,34 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   content: {
-    flex: 1, // Take up the remaining space between image and icon
+    flex: 1,
     justifyContent: 'center',
     gap: 12,
   },
   title: {
-    fontSize: 16, // Font size
-    fontWeight: '500', // Font weight as a string
-    lineHeight: 18, // Line height
-    letterSpacing: 0.32, // Letter spacing
-    color: '#101828', // Text color
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 18,
+    letterSpacing: 0.32,
+    color: '#101828',
   },
   description: {
-    fontSize: 12, // Font size
-    fontWeight: '400', // Font weight as a string
-    lineHeight: 18, // Line height
-    letterSpacing: 0.32, // Letter spacing
+    fontSize: 12,
+    fontWeight: '400',
+    lineHeight: 18,
+    letterSpacing: 0.32,
     color: '#484848',
     paddingRight: 20,
   },
   benefitAmount: {
     fontSize: 12,
-    fontWeight: '400', // Font weight as a string
-    lineHeight: 18, // Line height
-    letterSpacing: 0.32, // Letter spacing
+    fontWeight: '400',
+    lineHeight: 18,
+    letterSpacing: 0.32,
     color: '#484848',
   },
   icon: {
-    marginLeft: 'auto', // Push the icon to the right
+    marginLeft: 'auto',
   },
 
   chipContainer: {
@@ -231,7 +244,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   details: {
-    // textAlign:"center",
     flexDirection: 'row',
   },
   detailText: {

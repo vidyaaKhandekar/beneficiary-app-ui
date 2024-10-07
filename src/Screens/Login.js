@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import CustomButton from '../Component/CustomButton';
 import PropTypes from 'prop-types';
 import DropdownComponent from '../Component/DropdownComponent';
@@ -13,14 +13,14 @@ const Login = ({setIsLoggedIn}) => {
 
   return (
     <View style={styles.loginContainer}>
-      <View style={styles.logoContainer}>
-        <Image source={require('../Asset/fastPass1.png')} style={styles.logo} />
-      </View>
+      <View style={styles.logoContainer} />
       <View style={styles.inputContainer}>
         <Text style={styles.text}>Select Preferred Language</Text>
         <DropdownComponent
           DropdownLabel="Select Language"
           Data={languageOptions}
+          helperText="You Can Change It later"
+          helperData={true}
         />
         <CustomButton
           label="Sign In / Sign Up with DigiLocker"
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     paddingTop: 40,
-    paddingHorizontal: 20,
+    marginHorizontal: 16,
     backgroundColor: 'white',
   },
   text: {
@@ -71,6 +71,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#4D4639',
     marginBottom: 20,
+    fontFamily: 'Poppins-Medium',
+    marginLeft: 16,
   },
 });
 

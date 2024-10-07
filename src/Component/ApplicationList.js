@@ -10,7 +10,7 @@ const statusIcon = status => {
       <IconButton
         icon={status === 'Disbursal Complete' ? 'circle' : 'alert'}
         size={9}
-        iconColor={status === 'Disbursal Complete' ? '#0B7B69' : 'yellow'}
+        iconColor={status === 'Disbursal Complete' ? '#0B7B69' : 'white'}
       />
       <Text style={styles.statusText}>{status}</Text>
     </View>

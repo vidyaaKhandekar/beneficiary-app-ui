@@ -1,12 +1,11 @@
 import React from 'react';
 import {Appbar} from 'react-native-paper';
 import {View, Text, StyleSheet} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 const Navbar = () => {
   const navigation = useNavigation();
   const handleNavigate = () => {
-    navigation.navigate('Profile');
+    navigation.navigate('Home');
   };
   return (
     <Appbar.Header style={styles.appBarTheme}>
@@ -25,12 +24,12 @@ const Navbar = () => {
       {/* Language  on the right side */}
       <View style={styles.view}>
         <Text style={styles.text}>EN</Text>
-        <MaterialCommunityIcons
+        {/* <MaterialCommunityIcons
           name="chevron-down"
           size={15}
           color={'#4D4639'}
           style={styles.icon}
-        />
+        /> */}
       </View>
     </Appbar.Header>
   );
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
-    marginLeft: 15,
+    marginLeft: 20,
     color: '#4D4639',
     fontFamily: 'Poppins-Medium',
     fontWeight: 'bold',

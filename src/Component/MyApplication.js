@@ -97,12 +97,12 @@ const styles = StyleSheet.create({
   leftText: {
     fontSize: 14,
     color: '#1F1B13',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Poppins-Medium',
   },
   rightText: {
     fontSize: 10,
     color: '#0B7B69',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Poppins-Medium',
     fontWeight: 'bold',
   },
   applicationContainer: {
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 8,
     color: '#1A1B21',
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Poppins-Medium',
+    marginLeft: 4,
   },
   inputContainer: {
     flexDirection: 'row',
@@ -128,9 +129,10 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     padding: 8,
     fontFamily: 'Poppins-Regular',
+    color: '#1A1B21',
   },
   disabledInput: {
     backgroundColor: '#F0F0F0',

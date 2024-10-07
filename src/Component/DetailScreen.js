@@ -11,15 +11,15 @@ const DetailScreen = () => {
   const closeCOnfirmDialog = () => {
     setVisibleDialog(false);
   };
-  const renderItem = ({item}) => (
+  const renderItem = ({item: detailItem}) => (
     <View style={styles.listItem}>
       <Text style={styles.bullet}>•</Text>
-      <Text style={styles.itemText}>{item}</Text>
+      <Text style={styles.itemText}>{detailItem}</Text>
     </View>
   );
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {details?.map((item, idx) => {
+      {details?.map(item => {
         return (
           <View key={item.id} style={styles.sidePadding}>
             <Text style={styles.title}>{item?.title}</Text>
@@ -36,23 +36,30 @@ const DetailScreen = () => {
             </Text>
             <FlatList
               data={item.objective}
-              renderItem={renderItem}
-              keyExtractor={item => item}
+              renderItem={({item: objectiveItem}) =>
+                renderItem({item: objectiveItem})
+              }
+              keyExtractor={objectiveItem => objectiveItem}
               style={styles}
               scrollEnabled={false}
             />
+
             <Text style={styles.descriptionHeading}>Key Points:</Text>
             <FlatList
               data={item.keyPoints}
-              renderItem={renderItem}
-              keyExtractor={item => item}
+              renderItem={({item: keyPointsItem}) =>
+                renderItem({item: keyPointsItem})
+              }
+              keyExtractor={keyPointsItem => keyPointsItem}
               scrollEnabled={false}
             />
             <Text style={styles.descriptionHeading}>Mandatory Documents:</Text>
             <FlatList
               data={item.document}
-              renderItem={renderItem}
-              keyExtractor={item => item}
+              renderItem={({item: documentItem}) =>
+                renderItem({item: documentItem})
+              }
+              keyExtractor={documentItem => documentItem}
               scrollEnabled={false}
             />
             <CustomButton

@@ -11,7 +11,7 @@ const HomeStack = createNativeStackNavigator();
 export function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{headerShown: false}}>
-      <HomeStack.Screen name="Profile" component={Profile} />
+      <HomeStack.Screen name="Home" component={Profile} />
       <HomeStack.Screen
         name="ScholarshipListing"
         component={ScholarshipListing}

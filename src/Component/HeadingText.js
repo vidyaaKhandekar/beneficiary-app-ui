@@ -1,12 +1,18 @@
 import * as React from 'react';
-import {Avatar, IconButton, Text} from 'react-native-paper';
-import {StyleSheet, View} from 'react-native';
+import {Avatar, Text} from 'react-native-paper';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 const LeftContent = props => (
   <Avatar.Icon {...props} icon="account" size={50} style={styles.avatar} />
 );
-
+const BackIcon = ({onPress, iconSize = 24}) => {
+  return (
+    <TouchableOpacity style={styles.iconButton} onPress={onPress}>
+      <Icon name={'arrow-back'} size={iconSize} color={'#433E3F'} />
+    </TouchableOpacity>
+  );
+};
 const HeadingText = ({
   benificiary,
   heading,
@@ -19,15 +25,7 @@ const HeadingText = ({
 
     <View style={styles.textContainer}>
       <View style={styles.header}>
-        {back ? (
-          <IconButton
-            icon={'arrow-left'}
-            iconColor="#4D4639"
-            onPress={handleBack}
-            size={30}
-            style={styles.iconButton}
-          />
-        ) : null}
+        {back ? <BackIcon onPress={handleBack} /> : null}
         <Text style={styles.title}>{heading}</Text>
       </View>
       {helperHeading ? (
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
     marginRight: 19,
   },
   iconButton: {
-    margin: 0,
+    marginRight: 10,
     padding: 0,
   },
 });
