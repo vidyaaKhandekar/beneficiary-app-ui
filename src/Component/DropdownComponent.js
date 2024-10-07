@@ -68,6 +68,9 @@ DropdownComponent.propTypes = {
       value: PropTypes.any.isRequired,
     }),
   ).isRequired,
+  helperText: PropTypes.string,
+  helperData: PropTypes.bool,
+  error: PropTypes.bool,
 };
 
 export default DropdownComponent;

@@ -42,6 +42,10 @@ HeadingText.propTypes = {
   back: PropTypes.bool,
   handleBack: PropTypes.func,
 };
+BackIcon.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  iconSize: PropTypes.number,
+};
 
 const styles = StyleSheet.create({
   titleContainer: {

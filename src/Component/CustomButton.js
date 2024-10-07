@@ -46,6 +46,7 @@ CustomButton.propTypes = {
   marginTop: PropTypes.number,
   padding: PropTypes.number,
   borderColor: PropTypes.string,
+  marginBottom: PropTypes.number,
 };
 
 const styles = StyleSheet.create({
