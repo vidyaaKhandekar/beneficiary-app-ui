@@ -42,7 +42,7 @@ CustomButton.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   borderRadius: PropTypes.number,
-  handleClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   marginTop: PropTypes.number,
   padding: PropTypes.number,
   borderColor: PropTypes.string,

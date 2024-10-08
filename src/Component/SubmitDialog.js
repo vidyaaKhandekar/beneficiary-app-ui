@@ -9,7 +9,6 @@ const SubmitDialog = ({dialogVisible, closeSubmit}) => {
   };
   return (
     <View>
-      {/* Child component contains the FlatList */}
       <Portal>
         <Dialog
           visible={dialogVisible}
@@ -18,7 +17,6 @@ const SubmitDialog = ({dialogVisible, closeSubmit}) => {
           <View style={styles.dialogHeader}>
             <View>
               <Text style={styles.applicationText}>Application Submitted</Text>
-              {/* Styling for Status Text */}
               <Text style={styles.statusText}>Confirmation</Text>
             </View>
             <IconButton icon="close" onPress={sendCloseDialog} />

@@ -5,7 +5,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {StyleSheet} from 'react-native';
 import {Text} from 'react-native-paper';
 import authRoutes from './routes/authRoutes';
-
 const Tab = createBottomTabNavigator();
 
 export default function BottomNavigation() {
@@ -15,8 +14,14 @@ export default function BottomNavigation() {
     setRoutes([...authRoutes] as typeof routes);
   }, []);
 
-  function getTabBarIcon({route, color}: {route: any; color: string}) {
-    let iconName;
+  const getTabBarIcon = ({
+    route,
+    color,
+  }: {
+    route: {name: string};
+    color: string;
+  }): JSX.Element => {
+    let iconName: string | undefined;
 
     switch (route?.name) {
       case 'Profile':
@@ -32,8 +37,12 @@ export default function BottomNavigation() {
         break;
     }
 
-    return <MaterialCommunityIcons name={iconName} color={color} size={24} />;
-  }
+    return iconName ? (
+      <MaterialCommunityIcons name={iconName} color={color} size={24} />
+    ) : (
+      <></>
+    );
+  };
 
   if (!routes?.length) {
     return <Text>Loading ...</Text>;
@@ -61,7 +70,6 @@ export default function BottomNavigation() {
     </NavigationContainer>
   );
 }
-
 const styles = StyleSheet.create({
   barStyle: {
     backgroundColor: '#FAFAFA',

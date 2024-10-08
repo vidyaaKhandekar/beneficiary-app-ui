@@ -100,27 +100,24 @@ CardItem.propTypes = {
   }).isRequired,
 };
 const ScholarshipCard = () => {
-  const [dialogVisible, setDialogVisible] = React.useState(false);
+  // const [dialogVisible, setDialogVisible] = React.useState(false);
   const navigation = useNavigation();
-  const [hasMore, setHasMore] = React.useState(true);
+  const [hasMore] = React.useState(true);
   // Function that will be passed to child and called by the child
-  const closeDialog = value => {
-    setDialogVisible(value);
-  };
+  // const closeDialog = value => {
+  //   setDialogVisible(value);
+  // };
 
   return (
-    // <ScrollView contentContainerStyle={styles.applicationContainer}>
-
     <FlatList
       data={data}
       renderItem={({item}) => (
         <CardItem item={item} key={item.id} navigation={navigation} />
       )}
-      keyExtractor={item => item.id.toString()} // Make sure the key is unique
+      keyExtractor={item => item.id.toString()}
       contentContainerStyle={styles.listContainer}
       // onEndReached={loadData}
-      onEndReachedThreshold={0.5} // Trigger loading more when the scroll is halfway through the list
-      // ListFooterComponent={renderFooter} // Loading spinner when fetching more data
+      onEndReachedThreshold={0.5}
       ListFooterComponent={
         hasMore ? (
           <CustomButton
@@ -133,8 +130,6 @@ const ScholarshipCard = () => {
         ) : null
       }
     />
-
-    // </ScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -180,7 +175,7 @@ const styles = StyleSheet.create({
   image: {
     width: 50,
     height: 50,
-    borderRadius: 8, // Make it circular
+    borderRadius: 8,
     marginRight: 10,
   },
   content: {

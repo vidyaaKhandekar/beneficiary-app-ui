@@ -12,15 +12,9 @@ import DropdownComponent from './DropdownComponent';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const FilterDialog = () => {
   const [visible, setVisible] = React.useState(false);
-
   const showDialog = () => setVisible(true);
-
   const hideDialog = () => setVisible(false);
-  const [selectedEducation, setSelectedEducation] = React.useState(null);
-  const [selectedGender, setSelectedGender] = React.useState(null);
-  const [selectedIncome, setSelectedIncome] = React.useState(null);
-  const [selectedAmount, setSelectedAmount] = React.useState(null);
-  const [selectedSubject, setSelectedSubject] = React.useState(null);
+
   return (
     <View>
       <TouchableOpacity onPress={showDialog} style={styles.buttonContainer}>

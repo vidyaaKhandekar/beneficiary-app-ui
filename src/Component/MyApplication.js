@@ -7,8 +7,7 @@ import HeadingText from './HeadingText';
 
 import {useNavigation} from '@react-navigation/native';
 const MyApplication = () => {
-  const [isDisabled, setIsDisabled] = React.useState(false); // You can toggle this to disable all inputs
-
+  const [isDisabled] = React.useState(false);
   const navigation = useNavigation();
   const handleBack = () => {
     navigation.navigate('ScholarshipApplication');
