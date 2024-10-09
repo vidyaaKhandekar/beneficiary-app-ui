@@ -13,32 +13,27 @@ const BackIcon = ({onPress, iconSize = 24}) => {
     </TouchableOpacity>
   );
 };
-const HeadingText = ({
-  benificiary,
-  heading,
-  helperHeading,
-  back,
-  handleBack,
-}) => (
+const HeadingText = ({benificiary, heading, subHeading, handleBack}) => (
   <View style={styles.titleContainer}>
-    {benificiary ? <LeftContent /> : null}
-
-    <View style={styles.textContainer}>
-      <View style={styles.header}>
-        {back ? <BackIcon onPress={handleBack} /> : null}
-        <Text style={styles.title}>{heading}</Text>
+    {benificiary && <LeftContent />}
+    {(handleBack || heading || subHeading) && (
+      <View>
+        {(handleBack || heading) && (
+          <View style={styles.header}>
+            {handleBack && <BackIcon onPress={handleBack} />}
+            {heading && <Text style={styles.title}>{heading}</Text>}
+          </View>
+        )}
+        {subHeading && <Text style={styles.subtitle}>{subHeading}</Text>}
       </View>
-      {helperHeading ? (
-        <Text style={styles.subtitle}>{helperHeading}</Text>
-      ) : null}
-    </View>
+    )}
   </View>
 );
 
 HeadingText.propTypes = {
   benificiary: PropTypes.bool,
   heading: PropTypes.string.isRequired,
-  helperHeading: PropTypes.string,
+  subHeading: PropTypes.string,
   back: PropTypes.bool,
   handleBack: PropTypes.func,
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon library
 
-const CustomSearchbar = () => {
+const Searchbar = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   return (
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#E9E7EF',
     paddingHorizontal: 10,
-    borderRadius:28,
+    borderRadius: 28,
   },
   searchbar: {
     flex: 1,
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomSearchbar;
+export default Searchbar;

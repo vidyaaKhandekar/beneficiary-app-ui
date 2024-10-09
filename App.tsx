@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Login from './src/Screens/Login';
+import Login from './src/Screens/auth/Login';
 import BottomNavigation from './src/Navigation/BottomNavigation';
 
 export default function App() {

@@ -1,54 +1,47 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Profile from '../Screens/Profile';
-import ScholarshipListing from '../Screens/ScholarshipListing';
-import ScholarshipDetails from '../Component/ScholarshipDetails';
-import ScholarshipApplication from '../Screens/ScholarshipApplication';
-
-import MyApplication from '../Component/MyApplication';
+import List from '../Screens/benefits/List';
+import BenefitDetails from '../Screens/benefits/ViewDetails';
+import Application from '../Screens/benefits/Application';
+import MyApplication from '../Screens/benefits/MyApplication';
 
 const HomeStack = createNativeStackNavigator();
 
 export function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{headerShown: false}}>
-      <HomeStack.Screen name="Home" component={Profile} />
-      <HomeStack.Screen
-        name="ScholarshipListing"
-        component={ScholarshipListing}
-      />
+      <HomeStack.Screen name="Profile" component={Profile} />
+      <HomeStack.Screen name="BenefitsListing" component={List} />
     </HomeStack.Navigator>
   );
 }
-const ScholarshipListingStack = createNativeStackNavigator();
+const BenefitsListingStack = createNativeStackNavigator();
 
-export function ScholarshipListingStackScreen() {
+export function BenefitsListingStackScreen() {
   return (
-    <ScholarshipListingStack.Navigator screenOptions={{headerShown: false}}>
-      <ScholarshipListingStack.Screen
-        name="ScholarshipListing"
-        component={ScholarshipListing}
+    <BenefitsListingStack.Navigator screenOptions={{headerShown: false}}>
+      <BenefitsListingStack.Screen name="BenefitsListing" component={List} />
+      <BenefitsListingStack.Screen
+        name="BenefitDetails"
+        component={BenefitDetails}
       />
-      <ScholarshipListingStack.Screen
-        name="ScholarshipDetails"
-        component={ScholarshipDetails}
-      />
-    </ScholarshipListingStack.Navigator>
+    </BenefitsListingStack.Navigator>
   );
 }
 
-const ScholarshipApplicationStack = createNativeStackNavigator();
+const BenefitApplicationStack = createNativeStackNavigator();
 
-export function ScholarshipApplicationStackScreen() {
+export function BenefitApplicationStackScreen() {
   return (
-    <ScholarshipListingStack.Navigator screenOptions={{headerShown: false}}>
-      <ScholarshipApplicationStack.Screen
-        name="ScholarshipApplication"
-        component={ScholarshipApplication}
+    <BenefitsListingStack.Navigator screenOptions={{headerShown: false}}>
+      <BenefitApplicationStack.Screen
+        name="BenefitApplication"
+        component={Application}
       />
-      <ScholarshipApplicationStack.Screen
+      <BenefitApplicationStack.Screen
         name="MyApplication"
         component={MyApplication}
       />
-    </ScholarshipListingStack.Navigator>
+    </BenefitsListingStack.Navigator>
   );
 }

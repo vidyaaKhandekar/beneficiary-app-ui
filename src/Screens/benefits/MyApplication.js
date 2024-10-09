@@ -1,27 +1,26 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, Text, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {myApplicationData} from '../Constatnt/Constant';
-import Navbar from './Navbar';
-import HeadingText from './HeadingText';
-
+import {myApplicationData} from '../../Constatnt/Constant';
+import Navbar from '../../components/common/layout/Navbar';
+import HeadingText from '../../components/common/layout/HeadingText';
+import Layout from '../../components/common/layout/Layout';
 import {useNavigation} from '@react-navigation/native';
 const MyApplication = () => {
   const [isDisabled] = React.useState(false);
   const navigation = useNavigation();
   const handleBack = () => {
-    navigation.navigate('ScholarshipApplication');
+    navigation.navigate('BenefitApplication');
   };
 
   return (
-    <View style={styles.textContainer}>
-      <Navbar />
-      <HeadingText
-        heading={'My Applications'}
-        helperHeading={'Application for SC Scholarship 1'}
-        back={true}
-        handleBack={handleBack}
-      />
+    <Layout
+      _heading={{
+        heading: 'My Applications',
+        subHeading: 'Application for SC Scholarship1',
+        handleBack,
+      }}
+      isScrollable>
       <View style={styles.applicationRow}>
         <Text style={styles.leftText}>Status</Text>
         <Text style={styles.rightText}>Applied</Text>
@@ -51,7 +50,7 @@ const MyApplication = () => {
           </View>
         ))}
       </ScrollView>
-    </View>
+    </Layout>
   );
 };
 const styles = StyleSheet.create({

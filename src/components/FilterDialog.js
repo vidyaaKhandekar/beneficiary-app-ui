@@ -8,7 +8,7 @@ import {
   BenefitAmount,
   Subjet,
 } from '../Constatnt/Constant';
-import DropdownComponent from './DropdownComponent';
+import Dropdown from './common/inputs/Dropdown';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const FilterDialog = () => {
   const [visible, setVisible] = React.useState(false);
@@ -46,20 +46,11 @@ const FilterDialog = () => {
             <IconButton icon="close" onPress={hideDialog} />
           </View>
           <Dialog.Content>
-            <DropdownComponent
-              DropdownLabel="Education Level"
-              Data={EducationLevel}
-            />
-            <DropdownComponent DropdownLabel="Gender" Data={Gender} />
-            <DropdownComponent
-              DropdownLabel="Income Range"
-              Data={IncomeRange}
-            />
-            <DropdownComponent
-              DropdownLabel="Benefit Amount"
-              Data={BenefitAmount}
-            />
-            <DropdownComponent DropdownLabel="Subject" Data={Subjet} />
+            <Dropdown DropdownLabel="Education Level" Data={EducationLevel} />
+            <Dropdown DropdownLabel="Gender" Data={Gender} />
+            <Dropdown DropdownLabel="Income Range" Data={IncomeRange} />
+            <Dropdown DropdownLabel="Benefit Amount" Data={BenefitAmount} />
+            <Dropdown DropdownLabel="Subject" Data={Subjet} />
           </Dialog.Content>
           <Dialog.Actions>
             <Button

@@ -10,17 +10,7 @@ const Navbar = () => {
   return (
     <Appbar.Header style={styles.appBarTheme}>
       <Appbar.Action icon="menu" onPress={handleNavigate} />
-      <Appbar.Content
-        title="FAST PASS"
-        titleStyle={{
-          fontFamily: styles.fonts.regular.fontFamily,
-          fontSize: styles.fonts.regular.fontSize,
-          fontStyle: styles.fonts.regular.fontStyle,
-          fontWeight: styles.fonts.regular.fontWeight,
-          lineHeight: styles.fonts.regular.lineHeight,
-          textAlign: styles.fonts.regular.textAlign,
-        }}
-      />
+      <Appbar.Content title="Fast Pass" titleStyle={styles.titleStyle} />
       {/* Language  on the right side */}
       <View style={styles.view}>
         <Text style={styles.text}>EN</Text>
@@ -40,15 +30,13 @@ const styles = StyleSheet.create({
     marginLeft: '12px',
     backgroundColor: '#FAFAFA',
   },
-  fonts: {
-    regular: {
-      fontFamily: 'Poppins-Regular',
-      fontSize: 13,
-      fontStyle: 'italic',
-      fontWeight: '400',
-      lineHeight: 19.5,
-      textAlign: 'left',
-    },
+  titleStyle: {
+    fontFamily: 'Poppins-LightItalic',
+    fontSize: 13,
+    fontWeight: '400',
+    lineHeight: 19.5,
+    textAlign: 'left',
+    color: '#0A0A0B',
   },
   view: {
     height: 26,

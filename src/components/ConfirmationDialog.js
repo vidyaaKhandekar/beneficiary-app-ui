@@ -2,7 +2,7 @@ import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Dialog, Portal, Text, IconButton, List} from 'react-native-paper';
 import SubmitDialog from './SubmitDialog';
-import CustomButton from './CustomButton';
+import CustomButton from './common/button/Button';
 import PropTypes from 'prop-types';
 
 const LeftIcon = props => {

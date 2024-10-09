@@ -1,23 +1,23 @@
 import {
   HomeStackScreen,
-  ScholarshipApplicationStackScreen,
-  ScholarshipListingStackScreen,
+  BenefitApplicationStackScreen,
+  BenefitsListingStackScreen,
 } from '../AppNavigator';
 
 export default [
   {
-    name: 'Profile',
+    name: 'Home',
     component: HomeStackScreen,
     options: {tabBarLabel: 'Profile'},
   },
   {
     name: 'Search',
-    component: ScholarshipListingStackScreen,
+    component: BenefitsListingStackScreen,
     options: {tabBarLabel: 'Search'},
   },
   {
     name: 'My Application',
-    component: ScholarshipApplicationStackScreen,
+    component: BenefitApplicationStackScreen,
     options: {tabBarLabel: 'My Application'},
   },
 ];

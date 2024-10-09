@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import CustomButton from '../Component/CustomButton';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import Button from '../../components/common/button/Button';
 import PropTypes from 'prop-types';
-import DropdownComponent from '../Component/DropdownComponent';
+import Dropdown from '../../components/common/inputs/Dropdown';
 const Login = ({setIsLoggedIn}) => {
   // Dynamic list for language selection; expand as needed
   const languageOptions = [{label: 'English', value: '1'}];
@@ -13,21 +13,26 @@ const Login = ({setIsLoggedIn}) => {
 
   return (
     <View style={styles.loginContainer}>
-      <View style={styles.logoContainer} />
+      <View style={styles.logoContainer}>
+        <Image
+          source={require('../../Asset/fastPass.png')}
+          style={styles.logo}
+        />
+      </View>
       <View style={styles.inputContainer}>
         <Text style={styles.text}>Select Preferred Language</Text>
-        <DropdownComponent
+        <Dropdown
           DropdownLabel="Select Language"
           Data={languageOptions}
-          helperText="You Can Change It later"
+          helperText="You can change this later"
           helperData={true}
         />
-        <CustomButton
-          label="Sign In / Sign Up with DigiLocker"
+        <Button
+          label="Sign In / Sign Up With DigiLocker"
           padding={2}
           width="92%"
           handleClick={handleLogin}
-          accessibilityLabel="Sign In or Sign Up with DigiLocker"
+          accessibilityLabel="Sign In or Sign Up With DigiLocker"
         />
         <View style={{height: 220}} />
       </View>

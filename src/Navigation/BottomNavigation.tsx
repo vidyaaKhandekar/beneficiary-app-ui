@@ -24,7 +24,7 @@ export default function BottomNavigation() {
     let iconName: string | undefined;
 
     switch (route?.name) {
-      case 'Profile':
+      case 'Home':
         iconName = 'home';
         break;
       case 'Search':
