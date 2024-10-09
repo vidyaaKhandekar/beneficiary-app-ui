@@ -2,8 +2,6 @@ import React from 'react';
 import {View, TextInput, StyleSheet, Text, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {myApplicationData} from '../../Constatnt/Constant';
-import Navbar from '../../components/common/layout/Navbar';
-import HeadingText from '../../components/common/layout/HeadingText';
 import Layout from '../../components/common/layout/Layout';
 import {useNavigation} from '@react-navigation/native';
 const MyApplication = () => {

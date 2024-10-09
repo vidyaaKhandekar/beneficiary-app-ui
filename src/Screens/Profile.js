@@ -1,9 +1,7 @@
 import React from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
-import Navbar from '../components/common/layout/Navbar';
+import {ScrollView, StyleSheet} from 'react-native';
 import DocumentList from '../components/DocumentList';
 import {documentName} from '../Constatnt/Constant';
-import HeadingText from '../components/common/layout/HeadingText';
 import CustomButton from '../components/common/button/Button';
 import {useNavigation} from '@react-navigation/native';
 import Layout from '../components/common/layout/Layout';
