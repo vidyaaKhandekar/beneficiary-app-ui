@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "PiramalFrontend.app"
-               BlueprintName = "PiramalFrontend"
-               ReferencedContainer = "container:PiramalFrontend.xcodeproj">
+               BuildableName = "UBIFastPass.app"
+               BlueprintName = "UBIFastPass"
+               ReferencedContainer = "container:UBIFastPass.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "PiramalFrontendTests.xctest"
-               BlueprintName = "PiramalFrontendTests"
-               ReferencedContainer = "container:PiramalFrontend.xcodeproj">
+               BuildableName = "UBIFastPassTests.xctest"
+               BlueprintName = "UBIFastPassTests"
+               ReferencedContainer = "container:UBIFastPass.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "PiramalFrontend.app"
-            BlueprintName = "PiramalFrontend"
-            ReferencedContainer = "container:PiramalFrontend.xcodeproj">
+            BuildableName = "UBIFastPass.app"
+            BlueprintName = "UBIFastPass"
+            ReferencedContainer = "container:UBIFastPass.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "PiramalFrontend.app"
-            BlueprintName = "PiramalFrontend"
-            ReferencedContainer = "container:PiramalFrontend.xcodeproj">
+            BuildableName = "UBIFastPass.app"
+            BlueprintName = "UBIFastPass"
+            ReferencedContainer = "container:UBIFastPass.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
