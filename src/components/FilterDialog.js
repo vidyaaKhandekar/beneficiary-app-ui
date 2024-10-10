@@ -7,7 +7,7 @@ import {
   IncomeRange,
   BenefitAmount,
   Subjet,
-} from '../Constatnt/Constant';
+} from '../constatnt/Constant';
 import Dropdown from './common/inputs/Dropdown';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const FilterDialog = () => {

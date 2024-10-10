@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Profile from '../Screens/Profile';
-import List from '../Screens/benefits/List';
-import BenefitDetails from '../Screens/benefits/ViewDetails';
-import Application from '../Screens/benefits/Application';
-import MyApplication from '../Screens/benefits/MyApplication';
+import Profile from '../screens/Profile';
+import List from '../screens/benefits/List';
+import BenefitDetails from '../screens/benefits/ViewDetails';
+import Application from '../screens/benefits/Application';
+import MyApplication from '../screens/benefits/MyApplication';
 
 const HomeStack = createNativeStackNavigator();
 

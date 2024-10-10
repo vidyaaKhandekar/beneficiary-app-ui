@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, View, Text, StyleSheet} from 'react-native';
-import {details} from '../../Constatnt/Constant';
+import {details} from '../../constatnt/Constant';
 import CustomButton from '../../components/common/button/Button';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import Layout from '../../components/common/layout/Layout';

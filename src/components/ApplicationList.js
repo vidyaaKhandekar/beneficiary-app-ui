@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
 import {List, IconButton} from 'react-native-paper';
 import PropTypes from 'prop-types';
-import {TrackApplicationList} from '../Constatnt/Constant';
+import {TrackApplicationList} from '../constatnt/Constant';
 import {useNavigation} from '@react-navigation/native';
 const statusIcon = status => {
   return (

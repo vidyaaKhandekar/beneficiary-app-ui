@@ -57,6 +57,7 @@ export default function BottomNavigation() {
           tabBarLabelStyle: styles.tabBarLabelStyle,
           tabBarStyle: styles.barStyle,
           headerShown: false,
+          unmountOnBlur: true,
         })}>
         {routes?.map((route: (typeof authRoutes)[number]) => (
           <Tab.Screen

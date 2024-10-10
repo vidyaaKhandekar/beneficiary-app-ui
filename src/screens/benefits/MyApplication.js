@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, Text, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {myApplicationData} from '../../Constatnt/Constant';
+import {myApplicationData} from '../../constatnt/Constant';
 import Layout from '../../components/common/layout/Layout';
 import {useNavigation} from '@react-navigation/native';
 const MyApplication = () => {

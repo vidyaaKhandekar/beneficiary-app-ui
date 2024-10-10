@@ -2,10 +2,13 @@ import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, Dialog, Portal, Text, IconButton} from 'react-native-paper';
 import PropTypes from 'prop-types';
+import {useNavigation} from '@react-navigation/native';
 const SubmitDialog = ({dialogVisible, closeSubmit}) => {
   // Function to call the parent's function
+  const navigation = useNavigation();
   const sendCloseDialog = () => {
     closeSubmit(false);
+    navigation.navigate('BenefitsListing');
   };
   return (
     <View>
