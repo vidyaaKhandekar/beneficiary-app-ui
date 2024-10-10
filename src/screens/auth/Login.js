@@ -15,7 +15,7 @@ const Login = ({setIsLoggedIn}) => {
     <View style={styles.loginContainer}>
       <View style={styles.logoContainer}>
         <Image
-          source={require('../../Asset/fastPass.png')}
+          source={require('../../asset/fastPass.png')}
           style={styles.logo}
         />
       </View>
