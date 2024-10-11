@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     paddingTop: 40,
     marginHorizontal: 16,
-    backgroundColor: 'white',
+    backgroundColor: '#FAFAFA',
   },
   text: {
     fontSize: 16,

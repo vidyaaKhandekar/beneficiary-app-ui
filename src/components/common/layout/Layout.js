@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Navbar from './Navbar';
 import HeadingText from './HeadingText';
@@ -8,7 +8,7 @@ export default function Layout({isScrollable = true, children, ...props}) {
   if (isScrollable) {
     return (
       <App {...props}>
-        <ScrollView style={styles.view}>{children}</ScrollView>
+        <View style={styles.view}>{children}</View>
       </App>
     );
   }

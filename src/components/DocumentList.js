@@ -42,19 +42,24 @@ DocumentList.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     backgroundColor: '#FAFAFA',
   },
   listItem: {
     height: 61,
     borderBottomWidth: 1,
     borderBottomColor: '#DDDDDD',
+    justifyContent: 'center',
+    paddingLeft: 12,
   },
   title: {
     fontFamily: 'Poppins-Regular',
     fontSize: 14,
     fontWeight: '400',
     color: '#1F1B13',
+    paddingLeft: 8,
+  },
+  description: {
+    fontFamily: 'Poppins-Regular',
   },
 });
 

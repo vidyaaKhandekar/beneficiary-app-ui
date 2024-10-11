@@ -67,6 +67,9 @@ const FilterDialog = () => {
 };
 const styles = StyleSheet.create({
   container: {backgroundColor: '#FAFAFA'},
+  buttonContainer: {
+    marginRight: 12,
+  },
   dialogHeader: {
     height: 60,
     paddingHorizontal: 8,

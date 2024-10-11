@@ -15,7 +15,7 @@ const Profile = () => {
       _heading={{
         benificiary: true,
         heading: 'Anaya Gupta',
-        subHeading: 'Logged in with digilocker',
+        subHeading: 'Logged in with Digilocker',
       }}>
       {/* <CustomProgressBar totalDocuments={6} presentDocuments={6} /> */}
       {/* Scrollable part of the screen */}
@@ -23,7 +23,7 @@ const Profile = () => {
         <DocumentList documents={documentName} />
         <CustomButton
           testId={'click-explore-scholarship'}
-          label="Explore Scholarships"
+          label="Explore Benefits"
           marginTop={18}
           height={40}
           width={'95%'}

@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 10,
+    marginLeft: 2,
   },
   searchWrapper: {
     flexDirection: 'row-reverse',
