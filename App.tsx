@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
-import Login from './src/screens/auth/Login';
-import BottomNavigation from './src/navigation/BottomNavigation';
+// import Splash from './src/screens/auth/Splash';
+// import BottomNavigation from './src/navigation/BottomNavigation';
+// import Login from './src/screens/auth/Login';
+import LoginNavigation from './src/navigation/routes/geustRoutes';
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
-
-  if (isLoggedIn) {
-    return <BottomNavigation />;
-  }
-  return <Login setIsLoggedIn={setIsLoggedIn} />;
+  return <LoginNavigation />;
 }

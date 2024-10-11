@@ -1,4 +1,10 @@
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
 import React, {useState} from 'react';
 import HeadingText from '../../components/common/layout/HeadingText';
 import CustomButton from '../../components/common/button/Button';
@@ -6,21 +12,16 @@ import {useNavigation} from '@react-navigation/native';
 import CustomTextInput from '../../components/common/TextInput/TextInput';
 import Password from '../../components/common/TextInput/Password';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const Login = () => {
+const Register = () => {
   const navigation = useNavigation();
-
   const handleBack = () => {
-    navigation.navigate('Splash');
+    navigation.navigate('Login');
   };
-  const handleclick = () => {
-    navigation.navigate('Register');
-  };
-
-  const [mobile, setMobile] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-
   const handleLogin = () => {
     // Clear error after 3 seconds
     const clearError = () => {
@@ -29,20 +30,13 @@ const Login = () => {
       }, 3000); // 3 seconds timeout
     };
 
-    if (!mobile) {
-      setError('Enter Mobile No');
+    if (!firstName || !lastName || !password || !confirmPassword) {
+      setError('Enter all fields');
       clearError();
       return;
     }
-
-    if (mobile.length !== 10) {
-      setError('Mobile number must be 10 digits');
-      clearError();
-      return;
-    }
-
-    if (!password) {
-      setError('Password cannot be empty');
+    if (password === confirmPassword) {
+      setError('Passwords not match');
       clearError();
       return;
     }
@@ -50,24 +44,30 @@ const Login = () => {
     // If everything is fine, navigate to the next screen
     setError('');
   };
-
   return (
     <View style={{backgroundColor: '#FAFAFA', height: '100%'}}>
       <HeadingText handleBack={handleBack} />
-      <Text style={styles.text}>Sign In to your account !</Text>
+      <Text style={styles.text}>Sign Up !</Text>
       <View>
         <CustomTextInput
-          label={'Enter mobile no'}
-          value={mobile}
-          onChangeText={setMobile}
-          keyboardType="phone-pad"
-          maxLength={10}
-          margin={25}
+          label={'Enter First Name'}
+          value={firstName}
+          onChangeText={setFirstName}
+        />
+        <CustomTextInput
+          label={'Enter Last Name'}
+          value={lastName}
+          onChangeText={setLastName}
         />
         <Password
           label="Password"
           value={password}
           onChangeText={setPassword}
+        />
+        <Password
+          label="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
         />
         {error && (
           <View style={styles.errorContainer}>
@@ -80,19 +80,19 @@ const Login = () => {
           </View>
         )}
         <CustomButton
-          label="Sign In"
+          label="Sign Up"
           marginTop={50}
           width="90%"
           handleClick={handleLogin}
         />
       </View>
-      <Text style={styles.signUpText}>Do not have account</Text>
+      <Text style={styles.signUpText}>Do have account</Text>
       <Pressable
         onPress={() => {
-          navigation.navigate('Register');
+          navigation.navigate('Login');
         }}
         style={{alignSelf: 'center'}}>
-        <Text style={styles.signUpButton}>Sign Up</Text>
+        <Text style={styles.signUpButton}>Sign In</Text>
       </Pressable>
     </View>
   );
@@ -131,8 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins-Medium',
     color: '#3C5FDD',
-    textAlign: 'center',
   },
 });
 
-export default Login;
+export default Register;
