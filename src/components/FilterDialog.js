@@ -66,7 +66,7 @@ const FilterDialog = () => {
   );
 };
 const styles = StyleSheet.create({
-  container: {backgroundColor: '#FAFAFA'},
+  container: {backgroundColor: '#FFFFFF'},
   buttonContainer: {
     marginRight: 12,
   },

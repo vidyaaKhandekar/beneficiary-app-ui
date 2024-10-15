@@ -1,12 +1,28 @@
-import React, {useState} from 'react';
-import Login from './src/screens/auth/Login';
+import {NavigationContainer} from '@react-navigation/native';
+import React, {useContext} from 'react';
+import {AuthScreenStackScreen} from './src/navigation/AppNavigator';
 import BottomNavigation from './src/navigation/BottomNavigation';
+import {AuthContext, AuthProvider} from './src/utils/context/checkToken';
 
-export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
+const AppContent = () => {
+  const {isLoggedIn, checkToken} = useContext(AuthContext);
+  return (
+    <NavigationContainer>
+      {isLoggedIn ? (
+        <BottomNavigation />
+      ) : (
+        <AuthScreenStackScreen onLoginSuccess={checkToken} />
+      )}
+    </NavigationContainer>
+  );
+};
 
-  if (isLoggedIn) {
-    return <BottomNavigation />;
-  }
-  return <Login setIsLoggedIn={setIsLoggedIn} />;
-}
+const App = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+};
+
+export default App;

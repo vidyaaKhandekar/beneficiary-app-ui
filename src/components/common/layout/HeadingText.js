@@ -3,8 +3,8 @@ import {Avatar, Text} from 'react-native-paper';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const LeftContent = props => (
-  <Avatar.Icon {...props} icon="account" size={40} style={styles.avatar} />
+const LeftContent = ({label}) => (
+  <Avatar.Text label={label} size={40} style={styles.avatar} />
 );
 const BackIcon = ({onPress, iconSize = 24}) => {
   return (
@@ -13,13 +13,13 @@ const BackIcon = ({onPress, iconSize = 24}) => {
     </TouchableOpacity>
   );
 };
-const HeadingText = ({benificiary, heading, subHeading, handleBack}) => (
+const HeadingText = ({benificiary, heading, subHeading, handleBack, label}) => (
   <View style={styles.titleContainer}>
     {(handleBack || heading || subHeading) && (
       <View>
         {(handleBack || heading) && (
           <View style={styles.header}>
-            {benificiary && <LeftContent />}
+            {benificiary && <LeftContent label={label} />}
             {handleBack && <BackIcon onPress={handleBack} />}
             {heading && <Text style={styles.title}>{heading}</Text>}
           </View>
@@ -36,9 +36,10 @@ const HeadingText = ({benificiary, heading, subHeading, handleBack}) => (
 
 HeadingText.propTypes = {
   benificiary: PropTypes.bool,
-  heading: PropTypes.string.isRequired,
+  heading: PropTypes.string,
   subHeading: PropTypes.string,
   handleBack: PropTypes.func,
+  label: PropTypes.string,
 };
 BackIcon.propTypes = {
   onPress: PropTypes.func.isRequired,
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
   title: {
     fontFamily: 'Poppins-Regular',

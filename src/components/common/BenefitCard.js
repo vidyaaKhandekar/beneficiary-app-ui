@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
+import {Icon} from 'react-native-paper';
 
 const BenefitCard = ({item, navigation}) => (
   <View style={styles.card}>
@@ -15,10 +16,16 @@ const BenefitCard = ({item, navigation}) => (
       <Text numberOfLines={2} style={styles.subTitle}>
         {item?.subTitle}
       </Text>
-      <Text numberOfLines={2} style={styles.benefitAmount}>
-        <Text style={styles.currencyIcon}>₹ </Text>
+      {/* <Text numberOfLines={2} style={styles.benefitAmount}>
+        <Icon source={'currency-inr'} size={16} />
         {item?.benefitAmount}
-      </Text>
+      </Text> */}
+      <View style={styles.benefitAmount}>
+        <Icon source={'currency-inr'} size={16} color="#484848" />
+        <Text style={{fontSize: 12, marginLeft: 12}}>
+          {item?.benefitAmount}
+        </Text>
+      </View>
       {/* Simple Chip */}
       <View style={styles.chipContainer}>
         {item?.eligible?.map(val => {
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 35,
     paddingLeft: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
     marginBottom: 10,
     shadowColor: '#000',
@@ -80,7 +87,7 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: '#0B7B69',
     borderTopEndRadius: 10,
-    borderBottomStartRadius: 10,
+    borderBottomStartRadius: 5,
     textAlign: 'center',
     paddingTop: 2,
     paddingBottom: 2,
@@ -122,12 +129,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   benefitAmount: {
-    fontSize: 12,
-    fontWeight: '400',
-    lineHeight: 18,
-    letterSpacing: 0.32,
-    color: '#484848',
-    fontFamily: 'Poppins-Regular',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   icon: {
     marginLeft: 'auto',

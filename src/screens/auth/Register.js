@@ -1,87 +1,91 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for validation
 import {View, Text, StyleSheet, Pressable} from 'react-native';
+import React, {useState} from 'react';
 import HeadingText from '../../components/common/layout/HeadingText';
 import CustomButton from '../../components/common/button/Button';
 import {useNavigation} from '@react-navigation/native';
 import CustomTextInput from '../../components/common/TextInput/TextInput';
 import Password from '../../components/common/TextInput/Password';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {loginUser} from '../../service/auth';
+import {registerUser} from '../../service/auth';
 import {ActivityIndicator} from 'react-native-paper';
-import {saveToken} from '../../service/ayncStorage';
-
-const Login = ({onLoginSuccess}) => {
+const Register = () => {
   const navigation = useNavigation();
   const handleBack = () => {
-    navigation.navigate('Splash');
+    navigation.navigate('Login');
   };
-
+  const [firstName, setFirstName] = useState('');
   const [mobile, setMobile] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
   const handleLogin = async () => {
     // Clear error after 3 seconds
     const clearError = () => {
       setTimeout(() => {
         setError('');
-      }, 3000);
+      }, 4000); // 3 seconds timeout
     };
 
-    if (!mobile) {
-      setError('Enter Mobile No');
+    if (!firstName || !lastName || !password || !confirmPassword) {
+      setError('Enter all fields');
       clearError();
       return;
     }
-
-    if (mobile.length !== 10) {
-      setError('Mobile number must be 10 digits');
+    if (password !== confirmPassword) {
+      setError('Passwords not match');
       clearError();
       return;
     }
-
-    if (!password) {
-      setError('Password cannot be empty');
-      clearError();
-      return;
-    }
-
     try {
       setLoading(true); // Show loading indicator
-      const response = await loginUser({phone_number: mobile, password});
+      const response = await registerUser({
+        first_name: firstName,
+        last_name: lastName,
+        phone_number: mobile,
+        password: password,
+      });
       setLoading(false); // Hide loading indicator after response
-      saveToken(response.data.access_token, response.data.refresh_token);
-      onLoginSuccess();
+      console.log(response);
+      navigation.navigate('Login');
     } catch (error) {
-      setLoading(false); // Hide loading indicator
-      if (error.message === 'INVALID_USERNAME_PASSWORD_MESSAGE') {
-        setError('Invalid username or password');
-      } else {
-        setError(error.message);
-      }
+      setLoading(false);
+      setError(error.message);
       clearError();
     }
   };
-
   return (
-    <View style={{backgroundColor: '#FAFAFA', height: '100%'}}>
+    <View style={{backgroundColor: '#FFFFFF', height: '100%'}}>
       <HeadingText handleBack={handleBack} />
-      <Text style={styles.text}>Sign In to your account !</Text>
+      <Text style={styles.text}>Sign Up !</Text>
       <View>
+        <CustomTextInput
+          label={'Enter First Name'}
+          value={firstName}
+          onChangeText={setFirstName}
+        />
+        <CustomTextInput
+          label={'Enter Last Name'}
+          value={lastName}
+          onChangeText={setLastName}
+        />
         <CustomTextInput
           label={'Enter Mobile No'}
           value={mobile}
           onChangeText={setMobile}
           keyboardType="phone-pad"
           maxLength={10}
-          margin={25}
         />
         <Password
           label="Password"
           value={password}
           onChangeText={setPassword}
+        />
+        <Password
+          label="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
         />
         {error && (
           <View style={styles.errorContainer}>
@@ -96,30 +100,25 @@ const Login = ({onLoginSuccess}) => {
         {loading ? (
           <ActivityIndicator animating={true} color="#3C5FDD" />
         ) : (
-          <CustomButton label="Sign In" width="90%" handleClick={handleLogin} />
+          <CustomButton label="Sign Up" width="90%" handleClick={handleLogin} />
         )}
       </View>
-      <Text style={styles.signUpText}>Do not have an Account?</Text>
+      <Text style={styles.signUpText}>Do have account</Text>
       <Pressable
         onPress={() => {
-          navigation.navigate('Register');
+          navigation.navigate('Login');
         }}
         style={{alignSelf: 'center'}}>
-        <Text style={styles.signUpButton}>Sign Up</Text>
+        <Text style={styles.signUpButton}>Sign In</Text>
       </Pressable>
     </View>
   );
 };
 
-// Prop validation
-Login.propTypes = {
-  onLoginSuccess: PropTypes.func.isRequired,
-};
-
 const styles = StyleSheet.create({
   text: {
     height: 30,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
     fontSize: 16,
     paddingLeft: 16,
     fontFamily: 'Poppins-Medium',
@@ -149,8 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins-Medium',
     color: '#3C5FDD',
-    textAlign: 'center',
   },
 });
 
-export default Login;
+export default Register;

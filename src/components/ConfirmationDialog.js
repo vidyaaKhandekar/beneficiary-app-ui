@@ -37,17 +37,23 @@ const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
   return (
     <View>
       {/* Child component contains the FlatList */}
-      <Portal>
+      <Portal style={{padding: 0, backgroundColor: 'blue'}}>
         <Dialog
           visible={dialogVisible}
           onDismiss={sendCloseDialog}
           style={styles.container}>
           <View style={styles.dialogHeader}>
-            <View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                height: 40,
+              }}>
               <Text style={styles.applicationText}>Share Information</Text>
-              <Text style={styles.statusText}>Confirmation</Text>
+              <IconButton icon="close" onPress={sendCloseDialog} />
             </View>
-            <IconButton icon="close" onPress={sendCloseDialog} />
+            <Text style={styles.statusText}>Confirmation</Text>
           </View>
           <Dialog.Content style={styles.dialogContent}>
             <Text variant="bodyMedium" style={styles.conformationText}>
@@ -66,21 +72,20 @@ const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
             ))}
           </Dialog.Content>
           <Dialog.Actions style={styles.dialogAction}>
-            <View style={styles.View}>
-              <CustomButton
-                label={'Deny'}
-                width={140}
-                height={45}
-                handleClick={sendCloseDialog}
-                mode="outlined"
-              />
-              <CustomButton
-                label={'Accept'}
-                width={140}
-                height={45}
-                handleClick={openSubmitDialog}
-              />
-            </View>
+            <CustomButton
+              label={'Deny'}
+              width={135}
+              height={45}
+              handleClick={sendCloseDialog}
+              mode="outlined"
+            />
+            <View></View>
+            <CustomButton
+              label={'Accept'}
+              width={135}
+              height={45}
+              handleClick={openSubmitDialog}
+            />
           </Dialog.Actions>
         </Dialog>
       </Portal>
@@ -96,14 +101,13 @@ ConfirmationDialog.propTypes = {
   closeDialog: PropTypes.func.isRequired, // Ensure that closeDialog is a required function
 };
 const styles = StyleSheet.create({
-  container: {backgroundColor: '#FAFAFA'},
+  container: {},
   dialogHeader: {
-    height: 80,
-    paddingVertical: 12,
+    height: 70,
     paddingHorizontal: 8,
     paddingLeft: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#DDDDDD',
   },
@@ -149,9 +153,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   dialogAction: {
-    paddingHorizontal: 24,
+    width: '100%',
+    justifyContent: 'center',
     paddingTop: 16,
-    gap: 8,
+    flexDirection: 'row',
   },
   View: {
     flexDirection: 'row',

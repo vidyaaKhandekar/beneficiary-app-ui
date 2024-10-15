@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
 import ApplicationList from '../../components/ApplicationList';
 import SearchHeader from '../../components/common/layout/SearchHeader';
@@ -13,13 +13,15 @@ const BenefitApplication = () => {
         subHeading: 'Track your application progress',
       }}>
       <SearchHeader />
-      <ApplicationList navigation={navigation} />
+      <ScrollView>
+        <ApplicationList navigation={navigation} />
+      </ScrollView>
     </Layout>
   );
 };
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
     height: '100%',
   },
 });

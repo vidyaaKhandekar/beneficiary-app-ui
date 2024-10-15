@@ -24,7 +24,7 @@ const DropdownComponent = ({
   const [isFocus, setIsFocus] = useState(false);
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#FAFAFA',
+      backgroundColor: '#FFFFFF',
       padding: padding,
     },
     dropdown: {
@@ -45,7 +45,7 @@ const DropdownComponent = ({
     },
     label: {
       position: 'absolute',
-      backgroundColor: '#FAFAFA',
+      backgroundColor: '#FFFFFF',
       left: 22,
       top: 8,
       zIndex: 999,
@@ -75,7 +75,7 @@ const DropdownComponent = ({
     focusedLabel: {
       color: '#3C5FDD',
       position: 'absolute',
-      backgroundColor: '#FAFAFA',
+      backgroundColor: '#FFFFFF',
       left: 22,
       top: 8,
       zIndex: 999,

@@ -1,4 +1,4 @@
-import {StyleSheet, FlatList, ScrollView} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import SearchHeader from '../../components/common/layout/SearchHeader';
@@ -14,32 +14,29 @@ const List = () => {
       _heading={{
         heading: 'Browse Benefits',
       }}
-      isScrollable>
-      <SearchHeader />
-
-      <ScrollView>
-        <FlatList
-          data={benefits}
-          renderItem={({item}) => (
-            <BenefitCard item={item} key={item.id} navigation={navigation} />
-          )}
-          keyExtractor={item => item.id.toString()}
-          contentContainerStyle={styles.listContainer}
-          scrollEnabled={false}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            hasMore && (
-              <CustomButton
-                label="Load More"
-                marginTop={18}
-                height={40}
-                width={'100%'}
-                marginBottom={18}
-              />
-            )
-          }
-        />
-      </ScrollView>
+      isScrollable={true}
+      afterHeader={<SearchHeader />}>
+      <FlatList
+        data={benefits}
+        renderItem={({item}) => (
+          <BenefitCard item={item} key={item.id} navigation={navigation} />
+        )}
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={styles.listContainer}
+        scrollEnabled={false}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={
+          hasMore && (
+            <CustomButton
+              label="Load More"
+              marginTop={18}
+              height={40}
+              width={'100%'}
+              marginBottom={18}
+            />
+          )
+        }
+      />
     </Layout>
   );
 };

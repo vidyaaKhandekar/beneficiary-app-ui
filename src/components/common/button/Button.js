@@ -7,7 +7,7 @@ const CustomButton = ({
   testId,
   label = 'Click me',
   mode = 'contained',
-  height = 50,
+
   width = 'maxWidth',
   borderRadius = 30,
   handleClick,
@@ -22,7 +22,6 @@ const CustomButton = ({
       onPress={handleClick}
       testID={testId}
       style={{
-        height,
         width,
         borderRadius,
         marginTop,
@@ -39,7 +38,6 @@ CustomButton.propTypes = {
   testId: PropTypes.string,
   label: PropTypes.string,
   mode: PropTypes.string,
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   borderRadius: PropTypes.number,
   handleClick: PropTypes.func,
@@ -51,16 +49,14 @@ CustomButton.propTypes = {
 
 const styles = StyleSheet.create({
   view: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     fontSize: 14,
     fontFamily: 'Poppins-Medium',
-    margin: 0,
-    padding: 0,
     height: 50,
+    textAlign: 'center',
   },
 });
 

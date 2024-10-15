@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types'; // Import PropTypes
 import Navbar from './Navbar';
 import HeadingText from './HeadingText';
@@ -8,7 +8,7 @@ export default function Layout({isScrollable = true, children, ...props}) {
   if (isScrollable) {
     return (
       <App {...props}>
-        <View style={styles.view}>{children}</View>
+        <ScrollView style={styles.view}>{children}</ScrollView>
       </App>
     );
   }
@@ -26,15 +26,16 @@ Layout.propTypes = {
 
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
 });
 
-const App = ({children, _heading}) => {
+const App = ({children, afterHeader, _heading}) => {
   return (
     <>
       <Navbar />
       <HeadingText {..._heading} />
+      {afterHeader}
       {children}
     </>
   );
@@ -43,6 +44,7 @@ const App = ({children, _heading}) => {
 App.propTypes = {
   children: PropTypes.node, // Expecting React elements as children
   _heading: PropTypes.object, // Expecting an object for _heading props
+  afterHeader: PropTypes.any,
 };
 
 App.defaultProps = {

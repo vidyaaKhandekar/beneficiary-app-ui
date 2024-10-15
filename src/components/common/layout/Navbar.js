@@ -1,17 +1,50 @@
-import React from 'react';
-import {Appbar} from 'react-native-paper';
+import React, {useContext} from 'react';
+import {Appbar, Menu} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Dropdown from '../inputs/Dropdown';
+import {logoutUser} from '../../../service/auth';
+import {getToken} from '../../../service/ayncStorage';
+import {AuthContext} from '../../../utils/context/checkToken';
+
 const Navbar = () => {
+  const {checkToken} = useContext(AuthContext);
   const navigation = useNavigation();
   const languageOptions = [{label: 'EN', value: '1'}];
-  const handleNavigate = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
+  const navigateHome = () => {
     navigation.navigate('Home');
+  };
+  const handleLogout = async () => {
+    const token = await getToken();
+    if (token?.token && token?.refreshToken) {
+      try {
+        await logoutUser(token.token, token.refreshToken); // Call the logout function
+        checkToken();
+        // Optionally navigate to login screen here
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    } else {
+      console.error('No tokens found, user is not logged in');
+    }
   };
   return (
     <Appbar.Header style={styles.appBarTheme}>
-      <Appbar.Action icon="menu" onPress={handleNavigate} iconColor="#000000" />
+      <Menu
+        visible={visible}
+        onDismiss={closeMenu}
+        anchor={
+          <Appbar.Action icon="menu" onPress={openMenu} iconColor="#000000" />
+        }>
+        <Menu.Item onPress={navigateHome} title="Home" />
+        <Menu.Item onPress={handleLogout} title="Logout" />
+      </Menu>
       <Appbar.Content title="Fast Pass" titleStyle={styles.titleStyle} />
       {/* Language  on the right side */}
       <Dropdown
@@ -35,7 +68,7 @@ const styles = StyleSheet.create({
   appBarTheme: {
     marginTop: '24px',
     marginLeft: '12px',
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
   titleStyle: {
     fontFamily: 'Poppins-Italic',
