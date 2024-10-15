@@ -12,22 +12,26 @@ import {useNavigation} from '@react-navigation/native';
 import CustomTextInput from '../../components/common/TextInput/TextInput';
 import Password from '../../components/common/TextInput/Password';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {registerUser} from '../../service/auth';
+import {ActivityIndicator} from 'react-native-paper';
 const Register = () => {
   const navigation = useNavigation();
   const handleBack = () => {
     navigation.navigate('Login');
   };
   const [firstName, setFirstName] = useState('');
+  const [mobile, setMobile] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const handleLogin = () => {
+  const [loading, setLoading] = useState(false);
+  const handleLogin = async () => {
     // Clear error after 3 seconds
     const clearError = () => {
       setTimeout(() => {
         setError('');
-      }, 3000); // 3 seconds timeout
+      }, 4000); // 3 seconds timeout
     };
 
     if (!firstName || !lastName || !password || !confirmPassword) {
@@ -35,17 +39,30 @@ const Register = () => {
       clearError();
       return;
     }
-    if (password === confirmPassword) {
+    if (password !== confirmPassword) {
       setError('Passwords not match');
       clearError();
       return;
     }
-
-    // If everything is fine, navigate to the next screen
-    setError('');
+    try {
+      setLoading(true); // Show loading indicator
+      const response = await registerUser({
+        first_name: firstName,
+        last_name: lastName,
+        phone_number: mobile,
+        password: password,
+      });
+      setLoading(false); // Hide loading indicator after response
+      console.log(response);
+      navigation.navigate('Login');
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+      clearError();
+    }
   };
   return (
-    <View style={{backgroundColor: '#FAFAFA', height: '100%'}}>
+    <View style={{backgroundColor: '#FFFFFF', height: '100%'}}>
       <HeadingText handleBack={handleBack} />
       <Text style={styles.text}>Sign Up !</Text>
       <View>
@@ -58,6 +75,13 @@ const Register = () => {
           label={'Enter Last Name'}
           value={lastName}
           onChangeText={setLastName}
+        />
+        <CustomTextInput
+          label={'Enter Mobile No'}
+          value={mobile}
+          onChangeText={setMobile}
+          keyboardType="phone-pad"
+          maxLength={10}
         />
         <Password
           label="Password"
@@ -79,12 +103,11 @@ const Register = () => {
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        <CustomButton
-          label="Sign Up"
-          marginTop={50}
-          width="90%"
-          handleClick={handleLogin}
-        />
+        {loading ? (
+          <ActivityIndicator animating={true} color="#3C5FDD" />
+        ) : (
+          <CustomButton label="Sign Up" width="90%" handleClick={handleLogin} />
+        )}
       </View>
       <Text style={styles.signUpText}>Do have account</Text>
       <Pressable
@@ -101,7 +124,7 @@ const Register = () => {
 const styles = StyleSheet.create({
   text: {
     height: 30,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
     fontSize: 16,
     paddingLeft: 16,
     fontFamily: 'Poppins-Medium',
@@ -124,8 +147,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins-Medium',
     color: 'black',
-    marginTop: 60,
     textAlign: 'center',
+    marginTop: 10,
   },
   signUpButton: {
     fontSize: 12,

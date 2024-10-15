@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {StyleSheet} from 'react-native';
-import {Text} from 'react-native-paper';
+import {ActivityIndicator, Text} from 'react-native-paper';
 import authRoutes from './routes/authRoutes';
 const Tab = createBottomTabNavigator();
 
@@ -45,35 +45,33 @@ export default function BottomNavigation() {
   };
 
   if (!routes?.length) {
-    return <Text>Loading ...</Text>;
+    return <ActivityIndicator />;
   }
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          tabBarIcon: prop => getTabBarIcon({...prop, route}),
-          tabBarActiveTintColor: '#3C5FDD',
-          tabBarInactiveTintColor: '#7A7A7A',
-          tabBarLabelStyle: styles.tabBarLabelStyle,
-          tabBarStyle: styles.barStyle,
-          headerShown: false,
-          unmountOnBlur: true,
-        })}>
-        {routes?.map((route: (typeof authRoutes)[number]) => (
-          <Tab.Screen
-            key={route.name}
-            name={route.name}
-            component={route.component}
-            options={{tabBarLabel: route.name}}
-          />
-        ))}
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: prop => getTabBarIcon({...prop, route}),
+        tabBarActiveTintColor: '#3C5FDD',
+        tabBarInactiveTintColor: '#7A7A7A',
+        tabBarLabelStyle: styles.tabBarLabelStyle,
+        tabBarStyle: styles.barStyle,
+        headerShown: false,
+        unmountOnBlur: true,
+      })}>
+      {routes?.map((route: (typeof authRoutes)[number]) => (
+        <Tab.Screen
+          key={route.name}
+          name={route.name}
+          component={route.component}
+          options={{tabBarLabel: route.name}}
+        />
+      ))}
+    </Tab.Navigator>
   );
 }
 const styles = StyleSheet.create({
   barStyle: {
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
     paddingBottom: 8,
     height: 60,
   },

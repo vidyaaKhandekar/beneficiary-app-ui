@@ -1,26 +1,66 @@
-import React from 'react';
-import {Appbar} from 'react-native-paper';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
+import {Appbar, Menu} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Dropdown from '../inputs/Dropdown';
+import {logoutUser} from '../../../service/auth';
+import {getToken} from '../../../service/ayncStorage';
+import {AuthContext} from '../../../utils/context/checkToken';
+
 const Navbar = () => {
+  const {checkToken} = useContext(AuthContext);
   const navigation = useNavigation();
-  const handleNavigate = () => {
+  const languageOptions = [{label: 'EN', value: '1'}];
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
+  const navigateHome = () => {
     navigation.navigate('Home');
+  };
+  const handleLogout = async () => {
+    const token = await getToken();
+    if (token?.token && token?.refreshToken) {
+      try {
+        await logoutUser(token.token, token.refreshToken); // Call the logout function
+        checkToken();
+        // Optionally navigate to login screen here
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    } else {
+      console.error('No tokens found, user is not logged in');
+    }
   };
   return (
     <Appbar.Header style={styles.appBarTheme}>
-      <Appbar.Action icon="menu" onPress={handleNavigate} />
+      <Menu
+        visible={visible}
+        onDismiss={closeMenu}
+        anchor={
+          <Appbar.Action icon="menu" onPress={openMenu} iconColor="#000000" />
+        }>
+        <Menu.Item onPress={navigateHome} title="Home" />
+        <Menu.Item onPress={handleLogout} title="Logout" />
+      </Menu>
       <Appbar.Content title="Fast Pass" titleStyle={styles.titleStyle} />
       {/* Language  on the right side */}
-      <View style={styles.view}>
-        <Text style={styles.text}>EN</Text>
-        {/* <MaterialCommunityIcons
-          name="chevron-down"
-          size={15}
-          color={'#4D4639'}
-          style={styles.icon}
-        /> */}
-      </View>
+      <Dropdown
+        placeholderLabel="EN"
+        Data={languageOptions}
+        isRenderLabel={false}
+        height={25.5}
+        DropdownLabel="EN"
+        borderRadius={8}
+        width={60}
+        fontSize={12}
+        iconSize={18}
+        marginLeft={4}
+        borderColor="#4D4639"
+        padding={0}
+      />
     </Appbar.Header>
   );
 };
@@ -28,18 +68,18 @@ const styles = StyleSheet.create({
   appBarTheme: {
     marginTop: '24px',
     marginLeft: '12px',
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
   titleStyle: {
-    fontFamily: 'Poppins-LightItalic',
+    fontFamily: 'Poppins-Italic',
     fontSize: 13,
-    fontWeight: '400',
-    lineHeight: 19.5,
+    fontWeight: 500,
+    lineHeight: 20,
     textAlign: 'left',
     color: '#0A0A0B',
   },
   view: {
-    height: 26,
+    height: 22,
     width: 58,
     borderRadius: 8,
     borderWidth: 1,

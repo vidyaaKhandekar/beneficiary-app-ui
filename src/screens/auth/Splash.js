@@ -4,7 +4,7 @@ import Button from '../../components/common/button/Button';
 import PropTypes from 'prop-types';
 import Dropdown from '../../components/common/inputs/Dropdown';
 import {useNavigation} from '@react-navigation/native';
-const Splash = ({setIsLoggedIn}) => {
+const Splash = () => {
   // Dynamic list for language selection; expand as needed
   const languageOptions = [{label: 'English', value: '1'}];
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ const Splash = ({setIsLoggedIn}) => {
           helperData={true}
         />
         <Button
-          label="Sign In / Sign Up With DigiLocker"
+          label="Sign In / Sign Up "
           padding={2}
           width="92%"
           handleClick={handleLogin}
@@ -39,10 +39,6 @@ const Splash = ({setIsLoggedIn}) => {
       </View>
     </View>
   );
-};
-
-Splash.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -69,7 +65,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     paddingTop: 40,
     marginHorizontal: 16,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
   text: {
     fontSize: 16,

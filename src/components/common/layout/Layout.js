@@ -26,15 +26,16 @@ Layout.propTypes = {
 
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
 });
 
-const App = ({children, _heading}) => {
+const App = ({children, afterHeader, _heading}) => {
   return (
     <>
       <Navbar />
       <HeadingText {..._heading} />
+      {afterHeader && afterHeader}
       {children}
     </>
   );

@@ -1,32 +1,31 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import HeadingText from '../../components/common/layout/HeadingText';
 import CustomButton from '../../components/common/button/Button';
 import {useNavigation} from '@react-navigation/native';
 import CustomTextInput from '../../components/common/TextInput/TextInput';
 import Password from '../../components/common/TextInput/Password';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {loginUser} from '../../service/auth';
+import {ActivityIndicator} from 'react-native-paper';
+import {saveToken} from '../../service/ayncStorage';
 
-const Login = () => {
+const Login = ({onLoginSuccess}) => {
   const navigation = useNavigation();
-
   const handleBack = () => {
     navigation.navigate('Splash');
-  };
-  const handleclick = () => {
-    navigation.navigate('Register');
   };
 
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  const handleLogin = () => {
+  const [loading, setLoading] = useState(false);
+  const handleLogin = async () => {
     // Clear error after 3 seconds
     const clearError = () => {
       setTimeout(() => {
         setError('');
-      }, 3000); // 3 seconds timeout
+      }, 3000);
     };
 
     if (!mobile) {
@@ -47,8 +46,21 @@ const Login = () => {
       return;
     }
 
-    // If everything is fine, navigate to the next screen
-    setError('');
+    try {
+      setLoading(true); // Show loading indicator
+      const response = await loginUser({phone_number: mobile, password});
+      setLoading(false); // Hide loading indicator after response
+      saveToken(response.data.access_token, response.data.refresh_token);
+      onLoginSuccess();
+    } catch (error) {
+      setLoading(false); // Hide loading indicator
+      if (error.message === 'INVALID_USERNAME_PASSWORD_MESSAGE') {
+        setError('Invalid username or password');
+      } else {
+        setError(error.message);
+      }
+      clearError();
+    }
   };
 
   return (
@@ -57,7 +69,7 @@ const Login = () => {
       <Text style={styles.text}>Sign In to your account !</Text>
       <View>
         <CustomTextInput
-          label={'Enter mobile no'}
+          label={'Enter Mobile No'}
           value={mobile}
           onChangeText={setMobile}
           keyboardType="phone-pad"
@@ -79,14 +91,13 @@ const Login = () => {
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        <CustomButton
-          label="Sign In"
-          marginTop={50}
-          width="90%"
-          handleClick={handleLogin}
-        />
+        {loading ? (
+          <ActivityIndicator animating={true} color="#3C5FDD" />
+        ) : (
+          <CustomButton label="Sign In" width="90%" handleClick={handleLogin} />
+        )}
       </View>
-      <Text style={styles.signUpText}>Do not have account</Text>
+      <Text style={styles.signUpText}>Do not have an Account?</Text>
       <Pressable
         onPress={() => {
           navigation.navigate('Register');
@@ -124,8 +135,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins-Medium',
     color: 'black',
-    marginTop: 60,
     textAlign: 'center',
+    marginTop: 10,
   },
   signUpButton: {
     fontSize: 12,

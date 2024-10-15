@@ -16,7 +16,7 @@ const CustomTextInput = ({
       height: 50,
       width: '90%',
       alignSelf: 'center',
-      backgroundColor: '#FAFAFA',
+      backgroundColor: '#FFFFFF',
     },
   });
   return (

@@ -1,12 +1,13 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Profile from '../screens/Profile';
-import List from '../screens/benefits/List';
-import BenefitDetails from '../screens/benefits/ViewDetails';
-import Application from '../screens/benefits/Application';
-import MyApplication from '../screens/benefits/MyApplication';
 import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
 import Splash from '../screens/auth/Splash';
+import Application from '../screens/benefits/Application';
+import List from '../screens/benefits/List';
+import MyApplication from '../screens/benefits/MyApplication';
+import BenefitDetails from '../screens/benefits/ViewDetails';
 const HomeStack = createNativeStackNavigator();
 
 export function HomeStackScreen() {
@@ -49,11 +50,13 @@ export function BenefitApplicationStackScreen() {
 }
 const AuthScreenStack = createNativeStackNavigator();
 
-export function AuthScreenStackScreen() {
+export function AuthScreenStackScreen({onLoginSuccess}) {
   return (
     <AuthScreenStack.Navigator screenOptions={{headerShown: false}}>
       <AuthScreenStack.Screen name="Splash" component={Splash} />
-      <AuthScreenStack.Screen name="Login" component={Login} />
+      <AuthScreenStack.Screen name="Login">
+        {props => <Login {...props} onLoginSuccess={onLoginSuccess} />}
+      </AuthScreenStack.Screen>
       <AuthScreenStack.Screen name="Register" component={Register} />
     </AuthScreenStack.Navigator>
   );

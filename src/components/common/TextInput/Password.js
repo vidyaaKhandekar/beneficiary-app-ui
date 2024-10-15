@@ -4,7 +4,7 @@ import {TextInput} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 
 const PasswordInput = ({label, value, onChangeText, ...props}) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   return (
     <TextInput
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '90%',
     alignSelf: 'center',
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
 });
 

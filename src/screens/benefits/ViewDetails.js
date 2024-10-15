@@ -1,10 +1,11 @@
 import React from 'react';
-import {FlatList, View, Text, StyleSheet} from 'react-native';
+import {FlatList, View, Text, StyleSheet, ScrollView} from 'react-native';
 import {details} from '../../constatnt/Constant';
 import CustomButton from '../../components/common/button/Button';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import Layout from '../../components/common/layout/Layout';
 import {useNavigation} from '@react-navigation/native';
+import {Icon} from 'react-native-paper';
 const ViewDetails = () => {
   const [visibleDialog, setVisibleDialog] = React.useState(false);
   const navigation = useNavigation();
@@ -30,14 +31,17 @@ const ViewDetails = () => {
         subHeading: 'Application for SC Scholarship1',
         handleBack,
       }}>
-      <View contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         {details?.map(item => {
           return (
             <View key={item.id} style={styles.sidePadding}>
               <Text style={styles.title}>{item?.title}</Text>
-              <Text style={styles.amount}>
-                <Text style={styles.amountHeading}>₹</Text> {item?.amount}
-              </Text>
+              <View style={styles.benefitAmount}>
+                <Icon source={'currency-inr'} size={16} color="#484848" />
+                <Text style={{fontSize: 14, marginLeft: 12}}>
+                  {item?.amount}
+                </Text>
+              </View>
               <Text style={styles.descriptionHeading}>Details</Text>
               <Text style={styles.description}>Details{item?.desc}</Text>
               <Text numberOfLines={8} style={styles.description}>
@@ -90,7 +94,7 @@ const ViewDetails = () => {
             </View>
           );
         })}
-      </View>
+      </ScrollView>
     </Layout>
   );
 };
@@ -112,12 +116,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     paddingBottom: 12,
   },
-  amount: {
-    fontSize: 12,
-    color: '#484848',
-    margintop: 8,
-    fontFamily: 'Poppins-Regular',
-    marginBottom: 12,
+  benefitAmount: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   amountHeading: {fontSize: 18, fontFamily: 'Poppins-Regular'},
   description: {

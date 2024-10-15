@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     gap: 5,
+    backgroundColor: '#FFFFFF',
   },
   searchBar: {
     flex: 7,

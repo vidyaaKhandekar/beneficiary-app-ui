@@ -1,9 +1,28 @@
-import React, {useState} from 'react';
-// import Splash from './src/screens/auth/Splash';
-// import BottomNavigation from './src/navigation/BottomNavigation';
-// import Login from './src/screens/auth/Login';
-import LoginNavigation from './src/navigation/routes/geustRoutes';
+import {NavigationContainer} from '@react-navigation/native';
+import React, {useContext} from 'react';
+import {AuthScreenStackScreen} from './src/navigation/AppNavigator';
+import BottomNavigation from './src/navigation/BottomNavigation';
+import {AuthContext, AuthProvider} from './src/utils/context/checkToken';
 
-export default function App() {
-  return <LoginNavigation />;
-}
+const AppContent = () => {
+  const {isLoggedIn, checkToken, setIsLoggedIn} = useContext(AuthContext);
+  return (
+    <NavigationContainer>
+      {isLoggedIn ? (
+        <BottomNavigation />
+      ) : (
+        <AuthScreenStackScreen onLoginSuccess={checkToken} />
+      )}
+    </NavigationContainer>
+  );
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+};
+
+export default App;

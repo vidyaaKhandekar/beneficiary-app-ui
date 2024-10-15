@@ -1,4 +1,4 @@
-import {StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, FlatList, ScrollView} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import SearchHeader from '../../components/common/layout/SearchHeader';
@@ -12,11 +12,10 @@ const List = () => {
   return (
     <Layout
       _heading={{
-        heading: 'Browse Scholarships',
+        heading: 'Browse Benefits',
       }}
-      isScrollable>
-      <SearchHeader />
-
+      isScrollable={true}
+      afterHeader={<SearchHeader />}>
       <FlatList
         data={benefits}
         renderItem={({item}) => (

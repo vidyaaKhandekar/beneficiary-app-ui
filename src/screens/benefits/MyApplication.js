@@ -54,7 +54,7 @@ const MyApplication = () => {
 const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
   dateText: {
     fontSize: 14,

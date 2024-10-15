@@ -21,7 +21,7 @@ const BenefitApplication = () => {
 };
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
     height: '100%',
   },
 });

@@ -18,11 +18,17 @@ const SubmitDialog = ({dialogVisible, closeSubmit}) => {
           onDismiss={sendCloseDialog}
           style={styles.container}>
           <View style={styles.dialogHeader}>
-            <View>
-              <Text style={styles.applicationText}>Application Submitted</Text>
-              <Text style={styles.statusText}>Confirmation</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                height: 40,
+              }}>
+              <Text style={styles.applicationText}>Share Information</Text>
+              <IconButton icon="close" onPress={sendCloseDialog} />
             </View>
-            <IconButton icon="close" onPress={sendCloseDialog} />
+            <Text style={styles.statusText}>Confirmation</Text>
           </View>
           <Dialog.Content style={styles.dialogContent}>
             <Text style={styles.text}>
@@ -56,14 +62,13 @@ SubmitDialog.propTypes = {
   closeSubmit: PropTypes.func.isRequired, // Ensure that closeDialog is a required function
 };
 const styles = StyleSheet.create({
-  container: {backgroundColor: '#FAFAFA'},
+  container: {backgroundColor: '#FFFFFF'},
   dialogHeader: {
-    height: 80,
-    paddingVertical: 12,
+    height: 70,
     paddingHorizontal: 8,
     paddingLeft: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#DDDDDD',
   },
