@@ -24,6 +24,12 @@ const ViewDetails = () => {
       <Text style={styles.itemText}>{detailItem}</Text>
     </View>
   );
+  const documents = [
+    {id: 1, name: 'Marksheet(10th)'},
+    {id: 2, name: 'Income Certificate'},
+    {id: 3, name: 'Caste Certificate'},
+    {id: 4, name: 'Domicile Certificate'},
+  ];
   return (
     <Layout
       _heading={{
@@ -90,6 +96,8 @@ const ViewDetails = () => {
               <ConfirmationDialog
                 dialogVisible={visibleDialog}
                 closeDialog={closeCOnfirmDialog}
+                submitDialog={true}
+                documents={documents}
               />
             </View>
           );

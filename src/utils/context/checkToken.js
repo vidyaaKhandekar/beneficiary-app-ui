@@ -25,6 +25,9 @@ const AuthProvider = ({children}) => {
     setUserData(user);
     setDocuments(docs);
   };
+  const updateDocument = docs => {
+    setDocuments(docs);
+  };
 
   useEffect(() => {
     checkToken();

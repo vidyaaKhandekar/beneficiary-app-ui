@@ -51,9 +51,9 @@ export const logoutUser = async (accessToken, refreshToken) => {
       },
     );
 
-    await removeToken(); // Call removeToken to clear local tokens
+    await removeToken();
 
-    return response.data; // Return API response data
+    return response.data;
   } catch (error) {
     throw error.response ? error.response.data : new Error('Network Error');
   }

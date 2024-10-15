@@ -3,12 +3,14 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import SearchHeader from '../../components/common/layout/SearchHeader';
 import Layout from '../../components/common/layout/Layout';
-import {benefits} from '../../components/servises/benefits';
+import {data} from '../../components/servises/benefits';
+
 import BenefitCard from '../../components/common/BenefitCard';
 import CustomButton from '../../components/common/button/Button';
 const List = () => {
   const navigation = useNavigation();
   const [hasMore] = React.useState(true);
+  const benefits = data.ubi_network_cache; // data from API
   return (
     <Layout
       _heading={{

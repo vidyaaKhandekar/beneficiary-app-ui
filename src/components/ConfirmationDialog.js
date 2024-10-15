@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Dialog, Portal, Text, IconButton, List} from 'react-native-paper';
 import SubmitDialog from './SubmitDialog';
 import CustomButton from './common/button/Button';
@@ -15,20 +15,23 @@ const LeftIcon = props => {
     />
   );
 };
-const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
+const ConfirmationDialog = ({
+  dialogVisible,
+  closeDialog,
+  handleConfirmation,
+  submitDialog,
+  documents,
+}) => {
   const [submitDialogVisible, setSubmitDialogVisible] = React.useState(false);
-  const documents = [
-    {id: 1, value: 'Marksheet(10th)'},
-    {id: 2, value: 'Income Certificate'},
-    {id: 3, value: 'Caste Certificate'},
-    {id: 4, value: 'Domicile Certificate'},
-  ];
+
   // Function to call the parent's function
   const sendCloseDialog = () => {
     closeDialog(false);
   };
   const openSubmitDialog = () => {
-    sendCloseDialog();
+    if (handleConfirmation) {
+      handleConfirmation();
+    }
     setSubmitDialogVisible(true);
   };
   const closeSubmitDialog = () => {
@@ -55,22 +58,25 @@ const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
             </View>
             <Text style={styles.statusText}>Confirmation</Text>
           </View>
+
           <Dialog.Content style={styles.dialogContent}>
             <Text variant="bodyMedium" style={styles.conformationText}>
               Share my documents with the provider for processing my
               application.
             </Text>
-
-            {documents?.map(document => (
-              <List.Item
-                key={document.id}
-                title={document.value}
-                style={styles.listItem} // Apply styles here for the List.Item container
-                titleStyle={styles.titleStyle} // Custom font style for the title
-                left={props => LeftIcon(props)}
-              />
-            ))}
+            <ScrollView style={{height: 220}}>
+              {documents?.map(document => (
+                <List.Item
+                  key={document.name}
+                  title={document.name}
+                  style={styles.listItem} // Apply styles here for the List.Item container
+                  titleStyle={styles.titleStyle} // Custom font style for the title
+                  left={props => LeftIcon(props)}
+                />
+              ))}
+            </ScrollView>
           </Dialog.Content>
+
           <Dialog.Actions style={styles.dialogAction}>
             <CustomButton
               label={'Deny'}
@@ -89,10 +95,12 @@ const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
           </Dialog.Actions>
         </Dialog>
       </Portal>
-      <SubmitDialog
-        dialogVisible={submitDialogVisible}
-        closeSubmit={closeSubmitDialog}
-      />
+      {submitDialog && (
+        <SubmitDialog
+          dialogVisible={submitDialogVisible}
+          closeSubmit={closeSubmitDialog}
+        />
+      )}
     </View>
   );
 };
