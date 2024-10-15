@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import Button from '../../components/common/button/Button';
-import PropTypes from 'prop-types';
 import Dropdown from '../../components/common/inputs/Dropdown';
 import {useNavigation} from '@react-navigation/native';
 const Splash = () => {

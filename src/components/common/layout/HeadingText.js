@@ -39,6 +39,7 @@ HeadingText.propTypes = {
   heading: PropTypes.string,
   subHeading: PropTypes.string,
   handleBack: PropTypes.func,
+  label: PropTypes.string,
 };
 BackIcon.propTypes = {
   onPress: PropTypes.func.isRequired,

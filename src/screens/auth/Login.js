@@ -1,5 +1,6 @@
+import React, {useState} from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes for validation
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import React, {useContext, useState} from 'react';
 import HeadingText from '../../components/common/layout/HeadingText';
 import CustomButton from '../../components/common/button/Button';
 import {useNavigation} from '@react-navigation/native';
@@ -20,6 +21,7 @@ const Login = ({onLoginSuccess}) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
   const handleLogin = async () => {
     // Clear error after 3 seconds
     const clearError = () => {
@@ -107,6 +109,11 @@ const Login = ({onLoginSuccess}) => {
       </Pressable>
     </View>
   );
+};
+
+// Prop validation
+Login.propTypes = {
+  onLoginSuccess: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

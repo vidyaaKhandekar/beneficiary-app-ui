@@ -38,7 +38,6 @@ CustomButton.propTypes = {
   testId: PropTypes.string,
   label: PropTypes.string,
   mode: PropTypes.string,
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   borderRadius: PropTypes.number,
   handleClick: PropTypes.func,

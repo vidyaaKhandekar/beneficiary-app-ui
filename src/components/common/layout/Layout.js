@@ -35,7 +35,7 @@ const App = ({children, afterHeader, _heading}) => {
     <>
       <Navbar />
       <HeadingText {..._heading} />
-      {afterHeader && afterHeader}
+      {afterHeader}
       {children}
     </>
   );
@@ -44,6 +44,7 @@ const App = ({children, afterHeader, _heading}) => {
 App.propTypes = {
   children: PropTypes.node, // Expecting React elements as children
   _heading: PropTypes.object, // Expecting an object for _heading props
+  afterHeader: PropTypes.any,
 };
 
 App.defaultProps = {

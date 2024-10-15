@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
-import {Dialog, Icon} from 'react-native-paper';
+import {Icon} from 'react-native-paper';
 
 const BenefitCard = ({item, navigation}) => (
   <View style={styles.card}>

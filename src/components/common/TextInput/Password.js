@@ -1,5 +1,5 @@
-// components/PasswordInput.js
 import React, {useState} from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes for validation
 import {TextInput} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 
@@ -23,6 +23,13 @@ const PasswordInput = ({label, value, onChangeText, ...props}) => {
       {...props} // Additional props like keyboardType
     />
   );
+};
+
+// Prop validation
+PasswordInput.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChangeText: PropTypes.func,
 };
 
 const styles = StyleSheet.create({

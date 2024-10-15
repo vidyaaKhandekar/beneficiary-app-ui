@@ -1,4 +1,4 @@
-import {StyleSheet, FlatList, ScrollView} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import SearchHeader from '../../components/common/layout/SearchHeader';

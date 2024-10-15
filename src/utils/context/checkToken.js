@@ -1,6 +1,5 @@
 import {createContext, useState, useEffect} from 'react';
 import {getToken} from '../../service/ayncStorage';
-import {getDocumentsList, getUser} from '../../service/auth'; // Assuming these services exist
 
 const AuthContext = createContext();
 
@@ -22,20 +21,6 @@ const AuthProvider = ({children}) => {
       setIsLoggedIn(false);
     }
   };
-  // Function to fetch user data and documents after login
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const {sub} = await getToken();
-  //       const user = await getUser(sub);
-  //       const docs = await getDocumentsList();
-  //       setUserData(user);
-  //       setDocuments(docs.data);
-  //     } catch (error) {
-  //       console.error('Error fetching user data or documents:', error);
-  //     }
-  //   };
-
-  // Update user data if needed
   const updateUserData = (user, docs) => {
     setUserData(user);
     setDocuments(docs);
