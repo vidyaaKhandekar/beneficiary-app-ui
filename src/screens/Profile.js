@@ -21,7 +21,7 @@ const Profile = () => {
       const {sub} = await getTokenData(); // Assuming sub is the user identifier
       const result = await getUser(sub);
       const data = await getDocumentsList();
-      updateUserData(result, data.data); // Update user data and document list in context
+      updateUserData(result.user, data.data); // Update user data and document list in context
     } catch (error) {
       console.error('Error fetching user data or documents:', error);
     }
