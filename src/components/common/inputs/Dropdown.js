@@ -19,12 +19,13 @@ const DropdownComponent = ({
   marginLeft = 0,
   borderColor = '#767680',
   padding = 12,
+  backgroundColor = '#FFFFFF',
 }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#FFFFFF',
+      backgroundColor: backgroundColor,
       padding: padding,
     },
     dropdown: {
