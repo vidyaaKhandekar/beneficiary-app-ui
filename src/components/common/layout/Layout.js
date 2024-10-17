@@ -9,6 +9,7 @@ export default function Layout({
   isScrollable = true,
   loading,
   children,
+  isMenu = true,
   ...props
 }) {
   if (loading) {
@@ -50,10 +51,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const App = ({children, afterHeader, _heading}) => {
+const App = ({children, afterHeader, _heading, isMenu}) => {
   return (
     <>
-      <Navbar />
+      <Navbar isMenu />
       <HeadingText {..._heading} />
       {afterHeader}
       {children}
