@@ -9,8 +9,8 @@ const myApplicationData = [
   {id: 2, label: 'Last Name', value: 'last_name'},
   {id: 3, label: 'Gender', value: 'gender'},
   {id: 4, label: 'Age', value: 'age'},
-  {id: 5, label: 'Samagra Id', value: 'samarga_id'},
-  {id: 6, label: 'Class', value: 'current_class'},
+  {id: 5, label: 'Samagra Id', value: 'samagra_id'},
+  {id: 6, label: 'Class', value: 'class'},
   {id: 7, label: 'Adhaar Card', value: 'aadhar'},
   {id: 8, label: 'Marks', value: 'previous_year_marks'},
   {id: 9, label: 'Caste', value: 'caste'},
@@ -27,10 +27,8 @@ const MyApplication = ({route}) => {
   const init = async () => {
     try {
       const result = await getApplicationDetails(id);
-      setUserData({
-        ...(result?.application_data?.user || {}),
-        ...(result?.application_data?.userInfo || {}),
-      });
+      setUserData(result?.application_data);
+      console.log(result?.application_data);
       setBenefit_name(result?.application_name);
     } catch (error) {
       console.error('Error fetching application details:', error);
@@ -39,7 +37,7 @@ const MyApplication = ({route}) => {
   useEffect(() => {
     init();
   }, []);
-  console.log(myApplicationData);
+  console.log('caste', userData.age);
   return (
     <Layout
       _heading={{
