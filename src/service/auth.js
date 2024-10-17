@@ -1,9 +1,6 @@
 import axios from 'axios';
 import {removeToken} from './ayncStorage';
-import {useContext} from 'react';
-import {AuthContext} from '../utils/context/checkToken';
-
-const API_BASE_URL = 'https://dev-uba-bap.tekdinext.com/api';
+import {API_BASE_URL} from './env.dev';
 
 export const registerUser = async userData => {
   try {
@@ -53,9 +50,9 @@ export const logoutUser = async (accessToken, refreshToken) => {
       },
     );
 
-    await removeToken(); // Call removeToken to clear local tokens
+    await removeToken();
 
-    return response.data; // Return API response data
+    return response.data;
   } catch (error) {
     throw error.response ? error.response.data : new Error('Network Error');
   }
@@ -64,7 +61,7 @@ export const logoutUser = async (accessToken, refreshToken) => {
 export const getUser = async userId => {
   try {
     const response = await axios.get(
-      `${API_BASE_URL}/users/get_one/${userId}`,
+      `${API_BASE_URL}/users/get_one/${userId}?decryptData=true`,
       {
         headers: {
           Accept: '*/*',

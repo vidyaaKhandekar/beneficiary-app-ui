@@ -37,7 +37,7 @@ const MyApplication = ({route}) => {
   useEffect(() => {
     init();
   }, []);
-  console.log('caste', userData.age);
+
   return (
     <Layout
       _heading={{

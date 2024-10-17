@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Dialog, Portal, Text, IconButton, List} from 'react-native-paper';
 import SubmitDialog from './SubmitDialog';
 import CustomButton from './common/button/Button';
@@ -15,84 +15,89 @@ const LeftIcon = props => {
     />
   );
 };
-const ConfirmationDialog = ({dialogVisible, closeDialog}) => {
-  const [submitDialogVisible, setSubmitDialogVisible] = React.useState(false);
-  const documents = [
-    {id: 1, value: 'Marksheet(10th)'},
-    {id: 2, value: 'Income Certificate'},
-    {id: 3, value: 'Caste Certificate'},
-    {id: 4, value: 'Domicile Certificate'},
-  ];
+const ConfirmationDialog = ({
+  dialogVisible,
+  closeDialog,
+  handleConfirmation,
+  documents,
+}) => {
   // Function to call the parent's function
   const sendCloseDialog = () => {
     closeDialog(false);
   };
   const openSubmitDialog = () => {
-    sendCloseDialog();
-    setSubmitDialogVisible(true);
+    if (handleConfirmation) {
+      handleConfirmation();
+    }
   };
   const closeSubmitDialog = () => {
-    setSubmitDialogVisible(false);
+    closeDialog(false);
   };
   return (
     <View>
       {/* Child component contains the FlatList */}
-      <Portal style={{padding: 0, backgroundColor: 'blue'}}>
-        <Dialog
-          visible={dialogVisible}
-          onDismiss={sendCloseDialog}
-          style={styles.container}>
-          <View style={styles.dialogHeader}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                height: 40,
-              }}>
-              <Text style={styles.applicationText}>Share Information</Text>
-              <IconButton icon="close" onPress={sendCloseDialog} />
+      {typeof dialogVisible !== 'boolean' ? (
+        <SubmitDialog
+          dialogVisible={dialogVisible}
+          closeSubmit={closeSubmitDialog}
+        />
+      ) : (
+        <Portal style={{padding: 0, backgroundColor: 'blue'}}>
+          <Dialog
+            visible={dialogVisible}
+            onDismiss={sendCloseDialog}
+            style={styles.container}>
+            <View style={styles.dialogHeader}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  height: 40,
+                }}>
+                <Text style={styles.applicationText}>Share Information</Text>
+                <IconButton icon="close" onPress={sendCloseDialog} />
+              </View>
+              <Text style={styles.statusText}>Confirmation</Text>
             </View>
-            <Text style={styles.statusText}>Confirmation</Text>
-          </View>
-          <Dialog.Content style={styles.dialogContent}>
-            <Text variant="bodyMedium" style={styles.conformationText}>
-              Share my documents with the provider for processing my
-              application.
-            </Text>
 
-            {documents?.map(document => (
-              <List.Item
-                key={document.id}
-                title={document.value}
-                style={styles.listItem} // Apply styles here for the List.Item container
-                titleStyle={styles.titleStyle} // Custom font style for the title
-                left={props => LeftIcon(props)}
+            <Dialog.Content style={styles.dialogContent}>
+              <Text variant="bodyMedium" style={styles.conformationText}>
+                Share my documents with the provider for processing my
+                application.
+              </Text>
+              <ScrollView style={{height: 220}}>
+                {documents?.map(document => (
+                  <List.Item
+                    key={document.name}
+                    title={document.name}
+                    style={styles.listItem} // Apply styles here for the List.Item container
+                    titleStyle={styles.titleStyle} // Custom font style for the title
+                    left={props => LeftIcon(props)}
+                  />
+                ))}
+              </ScrollView>
+            </Dialog.Content>
+
+            <Dialog.Actions style={styles.dialogAction}>
+              <CustomButton
+                label={'Deny'}
+                width={135}
+                height={45}
+                handleClick={sendCloseDialog}
+                mode="outlined"
               />
-            ))}
-          </Dialog.Content>
-          <Dialog.Actions style={styles.dialogAction}>
-            <CustomButton
-              label={'Deny'}
-              width={135}
-              height={45}
-              handleClick={sendCloseDialog}
-              mode="outlined"
-            />
-            <View></View>
-            <CustomButton
-              label={'Accept'}
-              width={135}
-              height={45}
-              handleClick={openSubmitDialog}
-            />
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
-      <SubmitDialog
-        dialogVisible={submitDialogVisible}
-        closeSubmit={closeSubmitDialog}
-      />
+              <View></View>
+              <CustomButton
+                label={'Accept'}
+                width={135}
+                height={45}
+                handleClick={openSubmitDialog}
+              />
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+      )}
     </View>
   );
 };

@@ -17,7 +17,6 @@ const Searchbar = ({onSearch}) => {
           style={styles.iconButton}
           onPress={() => {
             onSearch(searchQuery);
-            setSearchQuery('');
           }}
         />
         {/* TextInput for search bar */}

@@ -3,49 +3,62 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import {Icon} from 'react-native-paper';
+import {
+  extractEligibilityValues,
+  formatDateString,
+} from '../../utils/JsHelper/helper';
 
-const BenefitCard = ({item, navigation}) => (
-  <View style={styles.card}>
-    <View style={styles.topRightView}>
-      <Text style={styles.dateText}>{item?.date}</Text>
-    </View>
-    <View style={styles.content}>
-      <Text numberOfLines={2} style={styles.title}>
-        {item?.title}
-      </Text>
-      <Text numberOfLines={2} style={styles.subTitle}>
-        {item?.subTitle}
-      </Text>
-      {/* <Text numberOfLines={2} style={styles.benefitAmount}>
+const BenefitCard = ({item, navigation}) => {
+  const dateStr = item?.item?.time?.range?.end;
+  const formattedDate = formatDateString(dateStr);
+  // const mandatoryDocuments = extractMandatoryDocuments(item?.item?.tags[2]);
+  const eligibility = extractEligibilityValues(item?.item?.tags[0].list);
+
+  return (
+    <View style={styles.card}>
+      <View style={styles.topRightView}>
+        <Text style={styles.dateText}>{formattedDate}</Text>
+      </View>
+      <View style={styles.content}>
+        <Text numberOfLines={2} style={styles.title}>
+          {item?.title}
+        </Text>
+        <Text numberOfLines={2} style={styles.subTitle}>
+          {item?.description}
+        </Text>
+        {/* <Text numberOfLines={2} style={styles.benefitAmount}>
         <Icon source={'currency-inr'} size={16} />
         {item?.benefitAmount}
       </Text> */}
-      <View style={styles.benefitAmount}>
-        <Icon source={'currency-inr'} size={16} color="#484848" />
-        <Text style={{fontSize: 12, marginLeft: 12}}>
-          {item?.benefitAmount}
-        </Text>
+        <View style={styles.benefitAmount}>
+          <Icon source={'currency-inr'} size={16} color="#484848" />
+          <Text style={{fontSize: 12, marginLeft: 12}}>
+            {item?.item?.price?.value}
+          </Text>
+        </View>
+        {/* Simple Chip */}
+        <View style={styles.chipContainer}>
+          {eligibility?.map(val => {
+            return (
+              <Text key={val} style={styles.chipColor}>
+                {val}
+              </Text>
+            );
+          })}
+        </View>
+        <Text style={styles.description}>{item?.description}</Text>
+        <TouchableOpacity
+          style={styles.viewDetailsRow}
+          onPress={() =>
+            navigation.navigate('BenefitDetails', {id: item?.item_id})
+          }>
+          <Text style={styles.detailText}>View Details</Text>
+          <Ionicons name="arrow-forward-outline" size={18} color="#0037B9" />
+        </TouchableOpacity>
       </View>
-      {/* Simple Chip */}
-      <View style={styles.chipContainer}>
-        {item?.eligible?.map(val => {
-          return (
-            <Text key={val} style={styles.chipColor}>
-              {val}
-            </Text>
-          );
-        })}
-      </View>
-      <Text style={styles.description}>{item?.description}</Text>
-      <TouchableOpacity
-        style={styles.viewDetailsRow}
-        onPress={() => navigation.navigate('BenefitDetails')}>
-        <Text style={styles.detailText}>View Details</Text>
-        <Ionicons name="arrow-forward-outline" size={18} color="#0037B9" />
-      </TouchableOpacity>
     </View>
-  </View>
-);
+  );
+};
 BenefitCard.propTypes = {
   item: PropTypes.shape({
     date: PropTypes.string.isRequired,
@@ -91,8 +104,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 2,
     paddingBottom: 2,
-    paddingRight: 5,
-    paddingLeft: 5,
+    minWidth: 125,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   dateText: {
     fontFamily: 'Poppins-Regular',

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes for validation
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import HeadingText from '../../components/common/layout/HeadingText';
@@ -7,9 +7,11 @@ import {useNavigation} from '@react-navigation/native';
 import CustomTextInput from '../../components/common/TextInput/TextInput';
 import Password from '../../components/common/TextInput/Password';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {loginUser} from '../../service/auth';
+import {getDocumentsList, getUser, loginUser} from '../../service/auth';
 import {ActivityIndicator} from 'react-native-paper';
-import {saveToken} from '../../service/ayncStorage';
+import {getTokenData, saveToken} from '../../service/ayncStorage';
+import ConfirmationDialog from '../../components/ConfirmationDialog';
+import {AuthContext} from '../../utils/context/checkToken';
 
 const Login = ({onLoginSuccess}) => {
   const navigation = useNavigation();
@@ -21,7 +23,8 @@ const Login = ({onLoginSuccess}) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const {userData, documents, updateUserData} = useContext(AuthContext);
   const handleLogin = async () => {
     // Clear error after 3 seconds
     const clearError = () => {
@@ -47,7 +50,8 @@ const Login = ({onLoginSuccess}) => {
       const response = await loginUser({phone_number: username, password});
       setLoading(false); // Hide loading indicator after response
       saveToken(response.data.access_token, response.data.refresh_token);
-      onLoginSuccess();
+      init();
+      setDialogVisible(true);
     } catch (error) {
       setLoading(false); // Hide loading indicator
       if (error.message === 'INVALID_USERNAME_PASSWORD_MESSAGE') {
@@ -56,6 +60,17 @@ const Login = ({onLoginSuccess}) => {
         setError(error.message);
       }
       clearError();
+    }
+  };
+
+  const init = async () => {
+    try {
+      const {sub} = await getTokenData(); // Assuming sub is the user identifier
+      const result = await getUser(sub);
+      const data = await getDocumentsList();
+      updateUserData(result, data.data);
+    } catch (error) {
+      console.error('Error fetching user data or documents:', error);
     }
   };
 
@@ -99,6 +114,12 @@ const Login = ({onLoginSuccess}) => {
         style={{alignSelf: 'center'}}>
         <Text style={styles.signUpButton}>Sign Up</Text>
       </Pressable>
+      <ConfirmationDialog
+        dialogVisible={dialogVisible}
+        closeDialog={setDialogVisible}
+        handleConfirmation={onLoginSuccess}
+        documents={documents}
+      />
     </View>
   );
 };
