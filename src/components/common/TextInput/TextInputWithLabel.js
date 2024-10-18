@@ -11,6 +11,7 @@ const TextInputWithLabel = ({label, isDisabled = true, value}) => {
           style={[styles.input]}
           value={value === null || value === undefined ? '--' : value}
           editable={false}
+          multiline={true}
           placeholder={label}
         />
         {/* <Icon

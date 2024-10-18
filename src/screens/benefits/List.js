@@ -1,5 +1,5 @@
 import {StyleSheet, FlatList, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import SearchHeader from '../../components/common/layout/SearchHeader';
 import Layout from '../../components/common/layout/Layout';
@@ -57,14 +57,7 @@ const List = () => {
         },
         search,
       });
-      console.log({
-        ...filter,
-        'ann-hh-inc': filter?.['ann-hh-inc']
-          ? `0-${filter?.['ann-hh-inc']}`
-          : '',
-      });
       setBenefits(result?.data?.ubi_network_cache || []);
-
       setLoading(false);
     };
     init();

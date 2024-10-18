@@ -135,14 +135,21 @@ const Login = () => {
           <CustomButton label="Sign In" width="90%" handleClick={handleLogin} />
         )}
       </View>
-      <Text style={styles.signUpText}>Do not have an Account?</Text>
-      <Pressable
-        onPress={() => {
-          navigation.navigate('Register');
-        }}
-        style={{alignSelf: 'center'}}>
-        <Text style={styles.signUpButton}>Sign Up</Text>
-      </Pressable>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: 10,
+        }}>
+        <Text style={styles.signUpText}>Don't Have An Account? </Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('Register');
+          }}>
+          <Text style={styles.signUpButton}>Sign Up</Text>
+        </Pressable>
+      </View>
       <ConfirmationDialog
         loading={loading}
         dialogVisible={dialogVisible}
@@ -180,14 +187,13 @@ const styles = StyleSheet.create({
     marginTop: 3,
   },
   signUpText: {
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: 'Poppins-Medium',
-    color: 'black',
+    color: '#4D4639',
     textAlign: 'center',
-    marginTop: 10,
   },
   signUpButton: {
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: 'Poppins-Medium',
     color: '#3C5FDD',
     textAlign: 'center',

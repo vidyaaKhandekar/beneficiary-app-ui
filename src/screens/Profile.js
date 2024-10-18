@@ -44,8 +44,11 @@ const Profile = () => {
       _heading={{
         benificiary: true,
         heading: `${userData?.first_name} ${userData?.last_name}`,
-        subHeading: 'Logged in with Digilocker',
-        label: `${userData?.first_name?.[0]}${userData?.last_name?.[0]}`,
+        subHeading: 'Logged in with E-Wallet',
+        label:
+          userData?.last_name?.length > 1
+            ? `${userData?.first_name?.[0]}${userData?.last_name?.[0]}`
+            : userData?.first_name?.[0],
       }}>
       {/* Scrollable part of the screen */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
