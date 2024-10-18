@@ -156,6 +156,7 @@ const Login = () => {
         closeDialog={setDialogVisible}
         handleConfirmation={handleCofirmation}
         documents={documents}
+        concentText="Please provide your consent to share the following with Fast Pass"
       />
     </View>
   );

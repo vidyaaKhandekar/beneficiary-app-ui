@@ -57,6 +57,7 @@ const Profile = () => {
           testId={'click-explore-scholarship'}
           label="Explore Benefits"
           marginTop={18}
+          marginBottom={25}
           height={40}
           width={'95%'}
           handleClick={handleOnPress}
