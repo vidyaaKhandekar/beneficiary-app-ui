@@ -23,16 +23,37 @@ export const registerUser = async userData => {
  * Login a user
  * @param {Object} loginData - Contains phone_number, password
  */
+// export const loginUser = async loginData => {
+//   console.log('log in response');
+//   try {
+//     console.log('log in response', response.data);
+//     const response = await axios.post(`${API_BASE_URL}/auth/login`, loginData, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
+//     console.log('log in response', response);
+//     return response;
+//   } catch (error) {
+//     console.log('log in error', error);
+//     throw error.response ? error.response : new Error('Network Error');
+//   }
+// };
 export const loginUser = async loginData => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, loginData, {
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      'https://dev-uba-bap.tekdinext.com/api/auth/login',
+      loginData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
     return response.data;
   } catch (error) {
-    throw error.response ? error.response.data : new Error('Network Error');
+    console.log('log in error in auth', error);
+    throw error.response ? error.response : new Error('Network Error11');
   }
 };
 export const logoutUser = async (accessToken, refreshToken) => {
@@ -63,7 +84,7 @@ export const getUser = async userId => {
     const {token} = await getToken();
     // Make the API call to fetch user data
     const response = await axios.get(
-      `${API_BASE_URL}/users/get_one/${userId}?decryptData=true`,
+      `${API_BASE_URL}/users/get_one/?decryptData=true`,
       {
         headers: {
           Accept: 'application/json', // 'application/json' is more specific and commonly used for APIs
@@ -76,6 +97,7 @@ export const getUser = async userId => {
     return response.data;
   } catch (error) {
     // Log more comprehensive error information
+
     console.error(`Failed to fetch user with ID ${userId}:`, error.message);
 
     // Re-throw the error for further handling if needed
@@ -85,13 +107,13 @@ export const getUser = async userId => {
 
 export const sendConsent = async user_id => {
   const {token} = await getToken();
+  console.log('user_id', user_id);
   const data = {
     user_id: user_id,
     purpose: 'Confirmation to access documents',
     purpose_text: 'Confirmation to access documents',
     accepted: true,
   };
-
   const headers = {
     Accept: '*/*',
     'Content-Type': 'application/json',
@@ -174,7 +196,7 @@ export const getApplicationDetails = async applicationId => {
     );
     return response.data;
   } catch (error) {
-    console.error('Failed to fetch application details:', error);
+    console.error('Failed to fetch application details:', error.message);
     throw error;
   }
 };

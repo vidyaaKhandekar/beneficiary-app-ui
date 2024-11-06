@@ -9,6 +9,7 @@ import BenefitCard from '../../components/common/BenefitCard';
 import {Text} from 'react-native-paper';
 import {getTokenData} from '../../service/ayncStorage';
 import {getUser} from '../../service/auth';
+import {Dialog, Portal} from 'react-native-paper';
 
 const List = () => {
   const navigation = useNavigation();
@@ -16,56 +17,84 @@ const List = () => {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState({});
   const [initState, setInitState] = useState('yes');
+  const [error, setError] = useState();
   // const [hasMore] = useState(true);
   // const benefits = data.ubi_network_cache; // data from API
   const [benefits, setBenefits] = useState([]);
 
   useEffect(() => {
     const init = async () => {
-      const {sub} = await getTokenData(); // Assuming sub is the user identifier
-      const user = await getUser(sub);
-      const filters = {
-        'social-eligibility': user?.userInfo?.caste,
-        'ann-hh-inc': user?.userInfo?.income,
-        'gender-eligibility': user?.userInfo?.gender,
-      };
-      const newFilter = {};
-      Object.keys(filters).forEach(key => {
-        if (filters[key] && filters[key] !== '') {
-          if (typeof filters[key] === 'string') {
-            newFilter[key] = filters[key].toLowerCase();
-          } else {
-            newFilter[key] = filters[key];
+      try {
+        const {sub} = await getTokenData(); // Assuming sub is the user identifier
+        const user = await getUser(sub);
+
+        const filters = {
+          'social-eligibility': user?.data?.caste,
+          'ann-hh-inc': user?.data?.income,
+          'gender-eligibility': user?.data?.gender,
+        };
+        const newFilter = {};
+        Object.keys(filters).forEach(key => {
+          if (filters[key] && filters[key] !== '') {
+            if (typeof filters[key] === 'string') {
+              newFilter[key] = filters[key].toLowerCase();
+            } else {
+              newFilter[key] = filters[key];
+            }
           }
-        }
-      });
-      setFilter(newFilter);
-      setInitState('no');
+        });
+        setFilter(newFilter);
+        setInitState('no');
+      } catch (e) {
+        setError(e.message);
+        setInitState('no');
+      }
     };
     init();
   }, []);
-  console.log(loading, initState);
+
   useEffect(() => {
     const init = async () => {
-      if (initState == 'no') {
-        setLoading(true);
-        console.log('hello2');
-        const result = await benefitServis.getAll({
-          filters: {
-            ...filter,
-            'ann-hh-inc': filter?.['ann-hh-inc']
-              ? `0-${filter?.['ann-hh-inc']}`
-              : '',
-          },
-          search,
-        });
-        console.log(result, 'result');
-        setBenefits(result?.data?.ubi_network_cache || []);
+      try {
+        if (initState == 'no') {
+          setLoading(true);
+          console.log('hello2');
+          const result = await benefitServis.getAll({
+            filters: {
+              ...filter,
+              'ann-hh-inc': filter?.['ann-hh-inc']
+                ? `0-${filter?.['ann-hh-inc']}`
+                : '',
+            },
+            search,
+          });
+          console.log(result, 'result');
+          setBenefits(result?.data?.ubi_network_cache || []);
+          setLoading(false);
+        }
+      } catch (e) {
+        setError(e.message);
         setLoading(false);
       }
     };
     init();
   }, [filter, search, initState]);
+
+  if (error) {
+    return (
+      <Portal>
+        <Dialog visible={!!error} onDismiss={() => setError('')}>
+          <Dialog.Title>Error</Dialog.Title>
+          <Dialog.Content>
+            <Text>{error}</Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Text onPress={() => setError('')}>Close</Text>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    );
+  }
 
   return (
     <Layout
@@ -77,6 +106,7 @@ const List = () => {
       afterHeader={
         <SearchHeader
           onSearch={setSearch}
+          searchValue={search}
           inputs={[
             {
               label: 'Caste',

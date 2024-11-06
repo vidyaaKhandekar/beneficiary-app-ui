@@ -4,14 +4,13 @@ import CustomButton from '../../components/common/button/Button';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import Layout from '../../components/common/layout/Layout';
 import {useNavigation} from '@react-navigation/native';
-import {ActivityIndicator, Icon} from 'react-native-paper';
+import {ActivityIndicator, Dialog, Icon, Portal} from 'react-native-paper';
 import * as benefitServis from '../../service/benefits';
 import WebViewFormExample from '../../components/common/webview/Form';
 import {getTokenData} from '../../service/ayncStorage';
 import {getUser} from '../../service/auth';
 
 const ViewDetails = ({route}) => {
-  // Retrieve the id passed from the HomeScreen
   const {id} = route.params;
   const [visibleDialog, setVisibleDialog] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -21,11 +20,13 @@ const ViewDetails = ({route}) => {
   const navigation = useNavigation();
   const [context, setContext] = useState({});
   const [isApplied, setIsApplied] = useState(false);
+  const [error, setError] = useState();
   const handleBack = () => {
     navigation.navigate('BenefitsListing');
   };
   const openCOnfirmDialog = async () => {
     setLoading(true);
+
     const result = await benefitServis.applyApplication({id, context});
     setWebFromProp({
       url: result?.data?.responses?.[0]?.message?.order?.items?.[0]?.xinput
@@ -41,12 +42,13 @@ const ViewDetails = ({route}) => {
   useEffect(() => {
     const init = async () => {
       try {
-        const {sub} = await getTokenData(); // Assuming sub is the user identifier
+        const {sub} = await getTokenData();
         const user = await getUser(sub);
         const result = await benefitServis.getOne({id});
         const resultItem =
           result?.data?.responses?.[0]?.message?.order?.items?.[0] || {};
         setContext(result?.data?.responses?.[0]?.context);
+        // console.log('getOne', result?.data);
         const docs = resultItem?.tags
           ?.find(e => e?.descriptor?.code == 'required-docs')
           ?.list.filter(e => e.value)
@@ -54,27 +56,30 @@ const ViewDetails = ({route}) => {
         setItem({...resultItem, document: docs});
         const formData =
           {
-            ...(user?.user || {}),
-            ...(user?.userInfo || {}),
-            class: user?.userInfo?.current_class || '',
-            marks_previous_class: user?.userInfo?.previous_year_marks || '',
-            phone_number: user?.userInfo?.phone || '',
+            ...(user?.data || {}),
+            ...(user?.data || {}),
+            class: user?.data?.current_class || '',
+            marks_previous_class: user?.data?.previous_year_marks || '',
+            phone_number: user?.data?.phone_number || '',
           } || {};
         setAuthUser(formData);
+
         const appResult = await benefitServis.getApplication({
           user_id: formData?.user_id,
           benefit_id: id,
         });
-        if (appResult?.length > 0) {
+
+        if (appResult?.data?.applications?.length > 0) {
           setIsApplied(true);
         }
         setLoading(false);
       } catch (e) {
-        console.log('Error:', e.message);
+        setError('Error:', e.message);
       }
     };
     init();
-  }, []);
+  }, [id]);
+
   const renderItem = ({item: detailItem}) => (
     <View style={styles.listItem}>
       <Text style={styles.bullet}>•</Text>
@@ -89,32 +94,39 @@ const ViewDetails = ({route}) => {
   ];
   const submitConfirm = async submission_id => {
     setLoading(true);
-    const result = await benefitServis.confirmApplication({
-      submission_id,
-      context,
-    });
-    const orderId = result?.data?.responses?.[0]?.message?.order?.id;
-    if (orderId) {
-      const payload = {
-        user_id: authUser?.user_id,
-        benefit_id: id,
-        benefit_provider_id: context?.bpp_id,
-        benefit_provider_uri: context?.bap_uri,
-        external_application_id: orderId,
-        application_name: item?.descriptor?.name,
-        status: 'submitted',
-        application_data: authUser,
-      };
-      try {
+    try {
+      const result = await benefitServis.confirmApplication({
+        submission_id,
+        item_id: id,
+        context,
+      });
+      const orderId = result?.data?.responses?.[0]?.message?.order?.id;
+      if (orderId) {
+        const payload = {
+          user_id: authUser?.user_id,
+          benefit_id: id,
+          benefit_provider_id: context?.bpp_id,
+          benefit_provider_uri: context?.bap_uri,
+          external_application_id: orderId,
+          application_name: item?.descriptor?.name,
+          status: 'submitted',
+          application_data: authUser,
+        };
         const appResult = await benefitServis.createApplication(payload);
         if (appResult) {
           setWebFromProp();
           setVisibleDialog({orderId, name: item?.descriptor?.name});
           setLoading(false);
         }
-      } catch (e) {
-        console.log(e.message);
+      } else {
+        setError(
+          'Error while creating application. Please try again later. (Status code 500)',
+        );
+        setLoading(false);
       }
+    } catch (e) {
+      setError('Error:', e.message);
+      setLoading(false);
     }
     setLoading(false);
   };
@@ -131,6 +143,21 @@ const ViewDetails = ({route}) => {
       </View>
     );
   }
+  if (error) {
+    return (
+      <Portal>
+        <Dialog visible={!!error} onDismiss={() => setError('')}>
+          <Dialog.Title>Error</Dialog.Title>
+          <Dialog.Content>
+            <Text>{error}</Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Text onPress={() => setError('')}>Close</Text>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    );
+  }
   if (webFromProp?.url) {
     return (
       <WebViewFormExample {...webFromProp} setPageContent={submitConfirm} />
@@ -144,7 +171,7 @@ const ViewDetails = ({route}) => {
       }}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.sidePadding}>
-          <Text style={styles.title}>{item?.descriptor?.name}</Text>
+          <Text style={styles.title}> Benefit</Text>
           <View style={styles.benefitAmount}>
             <Icon source={'currency-inr'} size={16} color="#484848" />
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -196,6 +223,7 @@ const ViewDetails = ({route}) => {
                 scrollEnabled={false}
               />
               <CustomButton
+                marginTop={40}
                 label={
                   isApplied
                     ? 'Application Already Submitted'

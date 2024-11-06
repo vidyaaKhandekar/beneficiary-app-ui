@@ -101,7 +101,7 @@ export const applyApplication = async ({id, context}) => {
   }
 };
 
-export const confirmApplication = async ({submission_id, context}) => {
+export const confirmApplication = async ({submission_id, item_id, context}) => {
   const data = {
     context: {
       ...context,
@@ -112,7 +112,7 @@ export const confirmApplication = async ({submission_id, context}) => {
     message: {
       order: {
         provider: {
-          id: '79',
+          id: item_id,
           descriptor: {
             name: '',
             images: [],
@@ -122,7 +122,7 @@ export const confirmApplication = async ({submission_id, context}) => {
         },
         items: [
           {
-            id: '79',
+            id: item_id,
             descriptor: {
               name: '',
               long_desc: '',

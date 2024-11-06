@@ -14,11 +14,11 @@ const BenefitApplication = () => {
     try {
       const {sub} = await getTokenData(); // Assuming sub is the user identifier
       const result = await getUser(sub);
-      console.log('User Data', result?.user?.user_id);
-      const user_id = result?.user?.user_id;
+
+      const user_id = result?.data?.user_id;
       const data = await getApplicationList(SearchText, user_id);
-      console.log(data, 'data');
-      setApplicationList(data);
+      console.log('application list ', data.data.applications);
+      setApplicationList(data.data.applications);
     } catch (error) {
       console.error('Error fetching application list:', error);
     }
@@ -26,7 +26,7 @@ const BenefitApplication = () => {
   useEffect(() => {
     init();
   }, []);
-  console.log(applicationList, 'application list');
+  console.log('application list ', applicationList);
   return (
     <Layout
       _heading={{
@@ -40,10 +40,5 @@ const BenefitApplication = () => {
     </Layout>
   );
 };
-const styles = StyleSheet.create({
-  view: {
-    backgroundColor: '#FFFFFF',
-    height: '100%',
-  },
-});
+
 export default BenefitApplication;

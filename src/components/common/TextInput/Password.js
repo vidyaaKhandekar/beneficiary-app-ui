@@ -30,12 +30,12 @@ const PasswordInput = ({
       secureTextEntry={showPassword}
       right={
         <TextInput.Icon
-          icon={showPassword ? 'eye-off' : 'eye'}
+          icon={showPassword ? 'eye' : 'eye-off'}
           onPress={() => setShowPassword(!showPassword)}
         />
       }
       style={styles.input}
-      {...props} // Additional props like keyboardType
+      {...props}
     />
   );
 };

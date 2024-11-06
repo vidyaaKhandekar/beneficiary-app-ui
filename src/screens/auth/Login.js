@@ -36,6 +36,7 @@ const Login = () => {
   const handleLogin = async () => {
     Keyboard.dismiss(); // Dismiss the keyboard
     // Clear error after 3 seconds
+
     const clearError = () => {
       setTimeout(() => {
         setError('');
@@ -43,7 +44,7 @@ const Login = () => {
     };
 
     if (!username) {
-      setError('Enter Username ');
+      setError('Enter Username');
       clearError();
       return;
     }
@@ -56,17 +57,19 @@ const Login = () => {
 
     try {
       setLoading(true); // Show loading indicator
-      const response = await loginUser({phone_number: username, password});
+      const response = await loginUser({username, password});
+      console.log('response in login', response);
       setLoading(false); // Hide loading indicator after response
       saveToken(response.data.access_token, response.data.refresh_token);
       init();
       setDialogVisible(true);
     } catch (error) {
       setLoading(false); // Hide loading indicator
-      if (error.message === 'INVALID_USERNAME_PASSWORD_MESSAGE') {
+      console.log('error in response', error.data.error);
+      if (error.data.error === 'INVALID_USERNAME_PASSWORD_MESSAGE') {
         setError('Invalid username or password');
       } else {
-        setError(error.message);
+        setError('Network Error');
       }
       clearError();
     }
@@ -78,10 +81,14 @@ const Login = () => {
       const {sub} = await getTokenData(); // Assuming sub is the user identifier
       const result = await getUser(sub);
       const data = await getDocumentsList();
-      updateUserData(result?.user, data.data);
+      console.log(data, 'data');
+      updateUserData(result?.data, data.data);
       setLoading(false);
     } catch (error) {
-      console.log('Error fetching user data or documents:', error.message);
+      console.log(
+        'Error fetching user data or documents: in login',
+        error.message,
+      );
       setLoading(false);
     }
   };
@@ -106,7 +113,7 @@ const Login = () => {
       />
       <View>
         <CustomTextInput
-          label={'UserName'}
+          label={'User Name'}
           value={username}
           onChangeText={setUsername}
           marginBottom={25}
@@ -156,7 +163,7 @@ const Login = () => {
         closeDialog={setDialogVisible}
         handleConfirmation={handleCofirmation}
         documents={documents}
-        concentText="Please provide your consent to share the following with Fast Pass"
+        consentText="Please provide your consent to share the following with Fast Pass"
       />
     </View>
   );
